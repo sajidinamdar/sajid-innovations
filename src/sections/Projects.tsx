@@ -30,10 +30,10 @@ export const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-20 md:py-28 bg-[#090D14] border-t border-slate-900">
+    <section id="projects" className="py-14 sm:py-20 md:py-28 bg-[#090D14] border-t border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 space-y-4">
+        <div className="max-w-3xl mb-8 sm:mb-12 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
             <span>Developer Portfolio</span>
@@ -43,18 +43,18 @@ export const Projects: React.FC = () => {
             Personal Projects & Demonstrations
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+          <p className="text-sm sm:text-lg text-slate-400 leading-relaxed">
             Explore projects I've developed or am developing to demonstrate my technical skills, experiment with technologies, and explore solutions to practical problems. These projects represent my own development work and demonstrations.
           </p>
         </div>
 
-        {/* Filter Controls */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 p-1.5 bg-slate-950/80 border border-slate-800/80 rounded-xl w-fit">
+        {/* Filter Controls with horizontal scroll on mobile */}
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-8 sm:mb-10 p-1.5 bg-slate-950/80 border border-slate-800/80 rounded-xl overflow-x-auto w-full sm:w-fit max-w-full no-scrollbar">
           {filterCategories.map(cat => (
             <button
               key={cat.key}
               onClick={() => setActiveFilter(cat.key)}
-              className={`px-4 py-2 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
+              className={`px-3.5 sm:px-4 py-2 text-xs font-medium rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                 activeFilter === cat.key
                   ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-slate-400 hover:text-white hover:bg-slate-900'
@@ -66,11 +66,11 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {filteredProjects.map((project: ProjectItem) => (
             <div
               key={project.id}
-              className="flex flex-col justify-between bg-[#0E1523] border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-8 transition-all duration-200 group"
+              className="flex flex-col justify-between bg-[#0E1523] border border-slate-800 hover:border-slate-700 rounded-2xl p-5 sm:p-8 transition-all duration-200 group"
             >
               <div>
                 {/* Status & Category */}
@@ -121,22 +121,22 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* Bottom buttons: View Project & View Source Code */}
-              <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
+              <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
+                  className="inline-flex items-center justify-center sm:justify-start gap-1.5 py-1.5 sm:py-0 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
                 >
                   <span>Explore Details</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                   {(project.demoUrl || project.liveUrl) && (
                     <a
                       href={project.demoUrl || project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2.5 sm:py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors min-h-[40px] sm:min-h-0"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>View Project</span>
@@ -147,7 +147,7 @@ export const Projects: React.FC = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2.5 sm:py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors min-h-[40px] sm:min-h-0"
                     >
                       <Github className="w-3.5 h-3.5" />
                       <span>View Source Code</span>
@@ -165,11 +165,11 @@ export const Projects: React.FC = () => {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150"
         >
-          <div className="relative w-full max-w-2xl bg-[#0E1523] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+          <div className="relative w-full max-w-2xl bg-[#0E1523] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col">
             {/* Modal Header */}
-            <div className="p-6 border-b border-slate-800 flex items-start justify-between gap-4">
+            <div className="p-4 sm:p-6 border-b border-slate-800 flex items-start justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 text-xs text-slate-400 mb-1">
                   <span className="font-semibold text-blue-400">{selectedProject.category}</span>
@@ -192,7 +192,7 @@ export const Projects: React.FC = () => {
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 overflow-y-auto space-y-6 text-sm text-slate-300">
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 text-sm text-slate-300">
               <div>
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
                   Summary
@@ -200,12 +200,12 @@ export const Projects: React.FC = () => {
                 <p className="leading-relaxed">{selectedProject.shortDescription}</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/70 border border-slate-800">
                   <span className="text-xs font-semibold text-slate-200 block mb-1">Business Problem:</span>
                   <p className="text-xs text-slate-400 leading-relaxed">{selectedProject.problemStatement}</p>
                 </div>
-                <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/70 border border-slate-800">
                   <span className="text-xs font-semibold text-slate-200 block mb-1">Delivered Solution:</span>
                   <p className="text-xs text-slate-400 leading-relaxed">{selectedProject.solution}</p>
                 </div>
@@ -229,7 +229,7 @@ export const Projects: React.FC = () => {
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
                   Components & Features
                 </h4>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {selectedProject.techStack.map((tech, idx) => (
                     <span
                       key={idx}
@@ -243,13 +243,13 @@ export const Projects: React.FC = () => {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-slate-800 bg-slate-950/50 flex items-center justify-between">
-              <span className="text-xs text-slate-400">Need something similar built for your business?</span>
+            <div className="p-4 sm:p-6 border-t border-slate-800 bg-slate-950/50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+              <span className="text-xs text-slate-400 text-center sm:text-left">Need something similar built for your business?</span>
               <a
                 href={siteConfig.getWhatsAppUrl(`Hi Sajid! I saw your ${selectedProject.name} solution and would like to build something similar for my business.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
+                className="w-full sm:w-auto px-4 py-2.5 sm:py-2 text-xs font-semibold text-center text-white bg-blue-600 hover:bg-blue-500 rounded-xl sm:rounded-lg transition-colors min-h-[44px] sm:min-h-0 flex items-center justify-center"
               >
                 Discuss Similar Project
               </a>

@@ -8,9 +8,9 @@ interface ContactProps {
 
 export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
   return (
-    <section id="contact" className="py-20 md:py-28 bg-[#0B0F17] border-t border-slate-900 relative">
+    <section id="contact" className="py-14 sm:py-20 md:py-28 bg-[#0B0F17] border-t border-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Heading and Messaging Channels */}
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
@@ -22,11 +22,11 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
               Let's Discuss Your Project
             </h2>
 
-            <div className="text-lg font-medium text-slate-200">
+            <div className="text-base sm:text-lg font-medium text-slate-200">
               Have an idea, a business problem, or a software requirement?
             </div>
 
-            <p className="text-base text-slate-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
               Tell me what you want to build. I'll review your requirements and discuss the possible approach, estimated scope, and next steps.
             </p>
 
@@ -37,10 +37,10 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
                 href={siteConfig.getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-4 rounded-xl bg-emerald-950/30 hover:bg-emerald-950/50 border border-emerald-900/40 hover:border-emerald-800 transition-all group"
+                className="flex items-center justify-between p-4 rounded-xl bg-emerald-950/30 hover:bg-emerald-950/50 border border-emerald-900/40 hover:border-emerald-800 transition-all group min-h-[48px]"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-lg bg-emerald-900/60 flex items-center justify-center text-emerald-400">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-900/60 flex items-center justify-center text-emerald-400 shrink-0">
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div>
@@ -52,39 +52,39 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
                     </div>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
               </a>
 
               {/* Email Card */}
               <a
                 href={`mailto:${siteConfig.email}?subject=Project%20Inquiry%20via%20Sajid%20Innovations`}
-                className="flex items-center justify-between p-4 rounded-xl bg-[#111827] hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 transition-all group"
+                className="flex items-center justify-between p-4 rounded-xl bg-[#111827] hover:bg-slate-800/80 border border-slate-800 hover:border-slate-700 transition-all group min-h-[48px]"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-blue-400">
+                  <div className="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-blue-400 shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="overflow-hidden">
                     <div className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
                       Email Inquiry
                     </div>
-                    <div className="text-xs text-slate-400 font-mono">
+                    <div className="text-xs text-slate-400 font-mono truncate">
                       {siteConfig.email}
                     </div>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
               </a>
 
               {/* Phone Calling Card */}
-              <div className="p-4 rounded-xl bg-[#111827] border border-slate-800 flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-[#111827] border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-indigo-400">
+                  <div className="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-indigo-400 shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="text-sm font-bold text-white">Telephone</div>
-                    <div className="text-xs text-slate-400 font-mono space-x-2">
+                    <div className="text-xs text-slate-400 font-mono flex flex-wrap items-center gap-2">
                       <a href={`tel:${siteConfig.primaryPhone.replace(/\s+/g, '')}`} className="hover:text-white underline">
                         {siteConfig.primaryPhone}
                       </a>
@@ -99,7 +99,7 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
             </div>
 
             {/* Social media links */}
-            <div className="pt-2 flex items-center gap-4 text-xs text-slate-400">
+            <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-slate-400">
               <span className="font-semibold text-slate-300">Social Profiles:</span>
               <a
                 href={siteConfig.githubUrl}
@@ -108,7 +108,7 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
                 className="flex items-center gap-1.5 hover:text-white transition-colors"
               >
                 <Github className="w-4 h-4" />
-                <span>Work Portfolio (GitHub)</span>
+                <span>GitHub</span>
               </a>
               <a
                 href={siteConfig.instagramUrl}
@@ -134,21 +134,21 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
           </div>
 
           {/* Right Column: Idea Submission Callout Box */}
-          <div className="lg:col-span-6 bg-gradient-to-b from-[#111827] to-[#0E1523] border border-slate-800 rounded-2xl p-7 sm:p-9 space-y-6 shadow-xl">
+          <div className="lg:col-span-6 bg-gradient-to-b from-[#111827] to-[#0E1523] border border-slate-800 rounded-2xl p-5 sm:p-7 md:p-9 space-y-5 sm:space-y-6 shadow-xl">
             <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
               <Sparkles className="w-6 h-6" />
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
                 Have a Detailed Idea or Requirements?
               </h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Use the guided inquiry submission form to describe your problem, requested features, timeline preference, and estimated budget. You'll receive a unique Reference ID for quick tracking.
               </p>
             </div>
 
-            <div className="space-y-3 pt-2 text-xs text-slate-400">
+            <div className="space-y-2.5 sm:space-y-3 pt-1 sm:pt-2 text-xs text-slate-400">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                 <span>Strictly confidential and private idea discussion</span>
@@ -165,7 +165,7 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
 
             <button
               onClick={onOpenIdeaModal}
-              className="w-full flex items-center justify-center gap-2 py-4 px-6 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/25 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+              className="w-full flex items-center justify-center gap-2 py-3.5 sm:py-4 px-6 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl shadow-lg shadow-blue-600/25 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 min-h-[48px]"
             >
               <span>Open Project Inquiry Form</span>
               <ArrowUpRight className="w-4 h-4" />

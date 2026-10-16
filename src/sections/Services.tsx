@@ -31,10 +31,10 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
   };
 
   return (
-    <section id="services" className="py-20 md:py-28 bg-[#0B0F17]">
+    <section id="services" className="py-14 sm:py-20 md:py-28 bg-[#0B0F17]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-4">
+        <div className="max-w-3xl mb-10 sm:mb-16 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
             <span>Custom Services</span>
@@ -44,32 +44,32 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
             What Can I Build for You?
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+          <p className="text-sm sm:text-lg text-slate-400 leading-relaxed">
             Every business and idea has different requirements. I work on custom solutions based on the problem you want to solve.
           </p>
         </div>
 
         {/* 6 Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
           {siteConfig.services.map((service: ServiceItem) => (
             <div
               key={service.id}
-              className="flex flex-col justify-between bg-[#111827] border border-slate-800 hover:border-slate-700/80 rounded-2xl p-6 sm:p-7 transition-all duration-200 hover:shadow-xl hover:shadow-black/40 group"
+              className="flex flex-col justify-between bg-[#111827] border border-slate-800 hover:border-slate-700/80 rounded-2xl p-5 sm:p-7 transition-all duration-200 hover:shadow-xl hover:shadow-black/40 group"
             >
               <div>
                 {/* Header with Icon */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform">
                     {getIcon(service.icon)}
                   </div>
                   <span className="text-xs font-mono text-slate-500">Service</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2.5 sm:mb-3 group-hover:text-blue-400 transition-colors">
                   {service.title}
                 </h3>
 
-                <p className="text-sm text-slate-300 mb-5 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-300 mb-4 sm:mb-5 leading-relaxed">
                   {service.shortDescription}
                 </p>
 
@@ -90,10 +90,10 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
               </div>
 
               {/* Bottom Actions */}
-              <div className="pt-5 border-t border-slate-800/80 flex items-center justify-between gap-3">
+              <div className="pt-4 sm:pt-5 border-t border-slate-800/80 flex items-center justify-between gap-3">
                 <button
                   onClick={() => onSelectService(service.title)}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-lg transition-colors cursor-pointer"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-3 sm:py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl sm:rounded-lg transition-colors cursor-pointer min-h-[44px]"
                 >
                   <span>Discuss This Service</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -104,7 +104,7 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Discuss ${service.title} on WhatsApp`}
-                  className="p-2.5 text-emerald-400 hover:text-emerald-300 bg-emerald-950/30 hover:bg-emerald-950/60 border border-emerald-900/50 rounded-lg transition-colors"
+                  className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-emerald-400 hover:text-emerald-300 bg-emerald-950/30 hover:bg-emerald-950/60 border border-emerald-900/50 rounded-xl sm:rounded-lg transition-colors shrink-0"
                 >
                   <MessageSquare className="w-4 h-4" />
                 </a>

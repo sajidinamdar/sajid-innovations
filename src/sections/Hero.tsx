@@ -8,7 +8,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Background ambient lighting */}
       <div
         aria-hidden="true"
@@ -16,23 +16,26 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Column: Core Value Proposition */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-blue-400 bg-blue-950/40 border border-blue-800/40 rounded-full">
-              <span>{siteConfig.brandPositioning}</span>
-              <span aria-hidden="true">·</span>
-              <span>Founder: {siteConfig.founderName}</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center px-3 py-1 text-xs font-semibold text-blue-400 bg-blue-950/40 border border-blue-800/40 rounded-full">
+                {siteConfig.brandPositioning}
+              </div>
+              <div className="inline-flex items-center px-3 py-1 text-xs font-medium text-slate-300 bg-slate-900 border border-slate-800 rounded-full">
+                Founder: {siteConfig.founderName}
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-[1.15]">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-[1.18] sm:leading-[1.15]">
               Have a Business Idea? <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500">
                 Let's Build It.
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl font-normal text-slate-300 text-balance leading-relaxed">
+            <p className="text-base sm:text-xl font-normal text-slate-300 text-balance leading-relaxed">
               {siteConfig.heroSubtitle}
             </p>
 
@@ -41,10 +44,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
             </p>
 
             {/* CTAs */}
-            <div className="pt-2 flex flex-wrap items-center gap-3.5">
+            <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-3.5">
               <button
                 onClick={onOpenIdeaModal}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-lg shadow-lg shadow-blue-600/25 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl sm:rounded-lg shadow-lg shadow-blue-600/25 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 min-h-[44px]"
               >
                 <span>Discuss Your Project</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -52,14 +55,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
 
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-lg transition-all duration-150"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-xl sm:rounded-lg transition-all duration-150 min-h-[44px]"
               >
                 <span>Explore My Projects</span>
               </a>
 
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-medium text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-800 rounded-lg transition-all duration-150"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-medium text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-800 rounded-xl sm:rounded-lg transition-all duration-150 min-h-[44px]"
               >
                 <span>Contact Me</span>
               </a>
@@ -73,18 +76,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
 
           {/* Right Column: Clear Solution Architecture Graphic */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#0F172A] border border-slate-800 p-6 shadow-2xl">
+            <div className="relative rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#0F172A] border border-slate-800 p-4 sm:p-6 shadow-2xl">
               <div className="flex items-center justify-between pb-4 border-b border-slate-800 text-xs text-slate-400">
                 <span className="font-semibold text-slate-200">How Your Application Works</span>
                 <span className="text-slate-400">Complete System</span>
               </div>
 
               {/* Architecture nodes diagram */}
-              <div className="py-6 space-y-4">
+              <div className="py-5 sm:py-6 space-y-3.5 sm:space-y-4">
                 {/* Node 1: What users see */}
-                <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 flex items-center justify-between hover:border-blue-500/40 transition-colors">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-4 hover:border-blue-500/40 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-blue-950 border border-blue-800/60 flex items-center justify-center text-blue-400">
+                    <div className="w-9 h-9 rounded-lg bg-blue-950 border border-blue-800/60 flex items-center justify-center text-blue-400 shrink-0">
                       <Layers className="w-4 h-4" />
                     </div>
                     <div>
@@ -92,18 +95,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
                       <div className="text-xs text-slate-400">Clean web & mobile screens · Fast, simple & easy to use</div>
                     </div>
                   </div>
-                  <span className="text-[11px] font-medium text-blue-400/90">Web & Phone</span>
+                  <span className="text-[11px] font-medium text-blue-400/90 self-end sm:self-auto shrink-0">Web & Phone</span>
                 </div>
 
                 {/* Connection line */}
                 <div className="flex justify-center">
-                  <div className="w-0.5 h-4 bg-slate-800" />
+                  <div className="w-0.5 h-3.5 sm:h-4 bg-slate-800" />
                 </div>
 
                 {/* Node 2: Behind the scenes engine */}
-                <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 flex items-center justify-between hover:border-indigo-500/40 transition-colors">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-4 hover:border-indigo-500/40 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-950 border border-indigo-800/60 flex items-center justify-center text-indigo-400">
+                    <div className="w-9 h-9 rounded-lg bg-indigo-950 border border-indigo-800/60 flex items-center justify-center text-indigo-400 shrink-0">
                       <Server className="w-4 h-4" />
                     </div>
                     <div>
@@ -111,16 +114,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
                       <div className="text-xs text-slate-400">User accounts · Automated notifications · Fast processing</div>
                     </div>
                   </div>
-                  <span className="text-[11px] font-medium text-indigo-400/90">Core Engine</span>
+                  <span className="text-[11px] font-medium text-indigo-400/90 self-end sm:self-auto shrink-0">Core Engine</span>
                 </div>
 
                 {/* Connection line */}
                 <div className="flex justify-center">
-                  <div className="w-0.5 h-4 bg-slate-800" />
+                  <div className="w-0.5 h-3.5 sm:h-4 bg-slate-800" />
                 </div>
 
                 {/* Node 3: AI & Data Vault */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-purple-500/40 transition-colors">
                     <div className="flex items-center gap-2 mb-1.5">
                       <Cpu className="w-4 h-4 text-purple-400" />

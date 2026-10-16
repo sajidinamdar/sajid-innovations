@@ -24,3 +24,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
+
+/* Hide scrollbar for smooth horizontal touch swipe on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -8,10 +8,10 @@ interface HowItWorksProps {
 
 export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenIdeaModal }) => {
   return (
-    <section id="process" className="py-20 md:py-28 bg-[#0B0F17] border-t border-slate-900">
+    <section id="process" className="py-14 sm:py-20 md:py-28 bg-[#0B0F17] border-t border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-4">
+        <div className="max-w-3xl mb-10 sm:mb-16 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
             <span>Development Process</span>
@@ -21,21 +21,21 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenIdeaModal }) => {
             From Idea to Working Solution
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+          <p className="text-sm sm:text-lg text-slate-400 leading-relaxed">
             A clear, structured 5-step approach to discuss requirements, build agreed features, and deliver working solutions.
           </p>
         </div>
 
         {/* 5-Step Process Timeline */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 relative">
           {siteConfig.processSteps.map((step, idx) => (
             <div
               key={idx}
-              className="bg-[#111827] border border-slate-800 rounded-2xl p-6 flex flex-col justify-between relative group hover:border-slate-700 transition-all"
+              className="bg-[#111827] border border-slate-800 rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative group hover:border-slate-700 transition-all"
             >
               <div>
                 {/* Step Number */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-3.5 sm:mb-4">
                   <span className="text-2xl font-black font-mono text-blue-400">
                     {step.step}
                   </span>
@@ -52,7 +52,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenIdeaModal }) => {
               </div>
 
               {idx < siteConfig.processSteps.length - 1 && (
-                <div className="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-slate-700">
+                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-slate-700">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               )}
@@ -61,7 +61,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenIdeaModal }) => {
         </div>
 
         {/* Reassurance banner */}
-        <div className="mt-12 p-6 rounded-2xl bg-[#0E1523] border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-2xl bg-[#0E1523] border border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
           <div className="flex items-start gap-3.5">
             <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
             <div>
@@ -76,7 +76,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenIdeaModal }) => {
 
           <button
             onClick={onOpenIdeaModal}
-            className="px-5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-lg transition-colors whitespace-nowrap cursor-pointer shrink-0"
+            className="w-full sm:w-auto px-5 py-3 sm:py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl sm:rounded-lg transition-colors whitespace-nowrap cursor-pointer shrink-0 min-h-[44px] sm:min-h-0 flex items-center justify-center"
           >
             Start with Step 01
           </button>

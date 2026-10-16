@@ -36,14 +36,14 @@ export const FloatingContactWidget: React.FC<FloatingContactWidgetProps> = ({ on
     <aside
       aria-label="Quick Contact Assistance"
       ref={widgetRef}
-      className="fixed bottom-6 right-6 z-30 flex flex-col items-end print:hidden select-none"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 flex flex-col items-end print:hidden select-none"
     >
       {/* Expanded Quick Options Menu */}
       {isOpen && (
         <div
           role="menu"
           aria-orientation="vertical"
-          className="mb-3 w-64 bg-[#111827] border border-slate-800 rounded-xl shadow-2xl shadow-black/60 p-3 space-y-2 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-2 duration-150"
+          className="mb-3 w-[calc(100vw-2rem)] max-w-[280px] sm:w-64 bg-[#111827] border border-slate-800 rounded-xl shadow-2xl shadow-black/60 p-3 space-y-2 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-2 duration-150"
         >
           <div className="px-2 py-1 text-xs font-semibold text-slate-400 border-b border-slate-800/80 flex items-center justify-between">
             <span>Quick Connect</span>

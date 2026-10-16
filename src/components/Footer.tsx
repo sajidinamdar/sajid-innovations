@@ -12,8 +12,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
 
   return (
     <footer className="bg-[#080B11] border-t border-slate-900 text-slate-400 text-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-10 sm:mb-12">
           {/* Brand info */}
           <div className="md:col-span-1 space-y-4">
             <div className="flex items-center gap-2.5">
@@ -153,10 +153,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-slate-900/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-center sm:text-left">
             <span>© {currentYear} {siteConfig.brandName}. All rights reserved.</span>
-            <span>·</span>
-            <span className="text-slate-600">No cookies or tracking pixels collected</span>
+            <span className="hidden min-[400px]:inline">·</span>
+            <span className="text-slate-600 block min-[400px]:inline">No cookies or tracking pixels collected</span>
           </div>
 
           <div className="flex items-center gap-6">

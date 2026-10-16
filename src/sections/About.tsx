@@ -4,9 +4,9 @@ import { siteConfig } from '../config/siteConfig';
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-20 md:py-28 bg-[#090D14] border-t border-slate-900">
+    <section id="about" className="py-14 sm:py-20 md:py-28 bg-[#090D14] border-t border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Bio & Philosophy */}
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
@@ -18,7 +18,7 @@ export const About: React.FC = () => {
               {siteConfig.aboutHeading}
             </h2>
 
-            <div className="space-y-4 text-slate-300 text-base leading-relaxed">
+            <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
               {siteConfig.aboutParagraphs.map((paragraph, idx) => (
                 <p key={idx}>{paragraph}</p>
               ))}
@@ -29,10 +29,10 @@ export const About: React.FC = () => {
             </div>
 
             {/* Quick Action Links */}
-            <div className="pt-4 flex flex-wrap items-center gap-4">
+            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:border-slate-700 transition-colors text-sm font-medium"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 rounded-xl sm:rounded-lg bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:border-slate-700 transition-colors text-sm font-medium min-h-[44px]"
               >
                 <Code2 className="w-4 h-4 text-blue-400" />
                 <span>See Past Work & Solutions</span>
@@ -43,7 +43,7 @@ export const About: React.FC = () => {
                 href={siteConfig.getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 rounded-xl sm:rounded-lg text-emerald-400 hover:text-emerald-300 bg-emerald-950/20 sm:bg-transparent border border-emerald-900/40 sm:border-transparent text-sm font-medium transition-colors min-h-[44px]"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>
@@ -53,9 +53,9 @@ export const About: React.FC = () => {
           </div>
 
           {/* Right Column: Technology Matrix */}
-          <div className="lg:col-span-6 bg-[#0E1523] border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
+          <div className="lg:col-span-6 bg-[#0E1523] border border-slate-800 rounded-2xl p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-white font-semibold text-base">
+              <div className="flex items-center gap-2 text-white font-semibold text-sm sm:text-base">
                 <Code2 className="w-5 h-5 text-blue-400" />
                 <span>What I Build & Deliver</span>
               </div>

@@ -56,7 +56,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0F17] text-[#F9FAFB] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#0B0F17] text-[#F9FAFB] flex flex-col font-sans overflow-x-hidden w-full">
       {/* 3-Zone Fixed Navbar */}
       <Navbar onOpenIdeaModal={() => handleOpenIdeaModal()} />
 
