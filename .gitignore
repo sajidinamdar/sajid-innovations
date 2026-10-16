@@ -1,0 +1,76 @@
+# ==========================================
+# Sajid Innovations - .gitignore
+# ==========================================
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.aistudio/
+
+# Production Builds
+dist/
+dist-ssr/
+build/
+*.local
+
+# Environment Variables & Secrets (CRITICAL: Never commit passwords/SMTP keys)
+.env
+.env.*
+!.env.example
+*.pem
+
+# Python & FastAPI
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor & IDE Directories
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# Temporary files
+*.tmp
+*.temp
