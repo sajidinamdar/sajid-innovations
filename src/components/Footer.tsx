@@ -20,7 +20,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
               <img
                 src="/logo.png"
                 alt={siteConfig.brandName}
-                className="w-9 h-9 object-contain rounded-md shadow-sm"
+                className="w-10 h-10 object-contain rounded-full shadow-sm"
               />
               <div className="flex flex-col text-left">
                 <span className="text-base font-bold text-white tracking-tight leading-tight">{siteConfig.brandName}</span>

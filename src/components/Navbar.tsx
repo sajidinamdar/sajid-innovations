@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenIdeaModal }) => {
           <img
             src="/logo.png"
             alt={siteConfig.brandName}
-            className="w-10 h-10 object-contain rounded-lg shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200"
+            className="w-11 h-11 object-contain rounded-full shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200"
           />
           <div className="flex flex-col text-left">
             <span className="text-base sm:text-lg font-bold tracking-tight text-white leading-tight">
