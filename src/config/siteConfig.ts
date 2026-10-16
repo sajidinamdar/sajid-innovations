@@ -3,13 +3,15 @@ import { FAQItem, ProjectItem, ServiceItem } from '../types/index.ts';
 export const siteConfig = {
   // Brand & Founder
   brandName: 'Sajid Innovations',
-  brandSubtitle: 'Software & AI Solutions',
-  brandTagline: 'Built by Sajid Inamdar',
-  logoUrl: '/logo.png',
-  faviconUrl: '/favicon.png',
-  centralMessage: "Have an Idea? Let's Build It.",
+  brandPositioning: 'Custom Software Development & AI Solutions',
+  brandSubtitle: 'Custom Software Development & AI Solutions',
+  brandTagline: "Have a Problem? Let's Build the Solution.",
+  centralMessage: "Have a Business Idea? Let's Build It.",
+  brandDescription:
+    'Sajid Innovations is a software development brand focused on building custom websites, web applications, AI-powered tools, business automation systems, and digital products based on individual requirements. We aim to turn ideas and real-world problems into practical, reliable, and user-friendly software solutions.',
   founderName: 'Sajid Inamdar',
-  professionalTitle: 'Full-Stack Software Developer & AI Solutions Builder | Websites, Apps & Business Tools',
+  founderRole: 'Founder & Software Developer',
+  professionalTitle: 'Software Developer & AI Solutions Builder | Websites, Apps & Business Tools',
   
   // Contact details
   primaryPhone: '+91 8329465339',
@@ -21,24 +23,33 @@ export const siteConfig = {
   instagramUsername: '@sajidinamdar_',
   instagramUrl: 'https://www.instagram.com/sajidinamdar_/',
   githubUrl: 'https://github.com/sajidinamdar',
-  // Configurable placeholder: leave empty string if not configured yet. The UI will hide the button if empty.
   linkedinUrl: '', 
 
   // Location & Timezone
   location: 'Maharashtra, India',
   timezone: 'IST (UTC+5:30)',
+  logoUrl: '/logo.png',
+  faviconUrl: '/favicon.png',
 
-  // Bio and philosophy
-  heroSubtitle: 'Turn your business ideas and daily bottlenecks into working websites, custom apps, smart AI tools, and automated systems.',
-  heroParagraph: "I'm Sajid Inamdar. I help business owners, startup founders, and individuals turn ideas into fast, reliable digital products. You work directly with me—the engineer designing and building your software—without agency middlemen or confusing jargon.",
+  // Hero Section Copy
+  heroTitle: "Have a Business Idea? Let's Build It.",
+  heroSubtitle:
+    'Sajid Innovations builds custom websites, web applications, business software, AI-powered tools, and automation systems tailored to your requirements.',
+  heroParagraph:
+    "Whether you need a website for your business, a custom management system, an AI chatbot, or a software product built from scratch, let's discuss your requirements and find the right solution.",
+  heroSupportingText:
+    'Direct communication with the developer, clear project requirements, transparent pricing, and solutions designed around your needs.',
+
+  // About Section Copy
+  aboutHeading: 'About Sajid Innovations',
   aboutParagraphs: [
-    "I'm Sajid Inamdar, a software developer dedicated to building practical, reliable digital tools for real-world businesses and founders.",
-    "Whether you need a high-converting business website, a custom web app, an automated WhatsApp notification system, or a smart AI assistant that answers questions from your documents, I handle the complete build from start to finish.",
-    "You work directly with the person who actually builds your software. That means fast communication, transparent updates, no confusing tech jargon, and solutions tailored to your exact budget and timeline.",
-    "I believe every great product begins with a real problem worth solving and a commitment to build something clean, fast, and easy to use."
+    "I'm Sajid Inamdar, a software developer passionate about turning ideas and business problems into practical digital solutions.",
+    'Through Sajid Innovations, I aim to build websites, custom software, AI applications, automation tools, and digital products that help businesses and individuals solve real-world problems.',
+    'My approach focuses on understanding requirements, choosing suitable technologies, building user-friendly applications, and delivering solutions with clear communication throughout the development process.',
+    'Sajid Innovations is at the beginning of its journey, with a focus on developing practical projects, improving technical capabilities, and building long-term relationships with customers.'
   ],
 
-  // Technology Groups for About Section (Expressed as Plain Business Capabilities)
+  // Technology Groups for About Section
   techStackGroups: [
     {
       category: 'Web & Mobile Screens',
@@ -46,351 +57,369 @@ export const siteConfig = {
     },
     {
       category: 'Behind-the-Scenes Engines',
-      skills: ['Secure User Login', 'Automated Notifications', 'Database Connections', 'Payment & Form Processing', 'Fast & Reliable Servers']
+      skills: ['Secure User Login', 'Automated Notifications', 'Database Connections', 'Payment & Form Processing', 'Fast & Reliable APIs']
     },
     {
       category: 'Smart AI & Chatbots',
-      skills: ['24/7 AI Chat Assistants', 'Instant Document & PDF Search', 'Accurate Question Answering', 'Knowledge Base Search', 'Custom AI Workflows']
+      skills: ['AI Chat Assistants', 'Document & PDF Search', 'Retrieval-Augmented Generation (RAG)', 'Knowledge Base Search', 'Custom AI Workflows']
     },
     {
-      category: 'Safe Data Storage',
-      skills: ['Permanent Cloud Storage', 'Customer Records Vault', 'Automatic Data Backups', 'Strict Data Privacy', 'Fast Search Retrieval']
+      category: 'Data Storage & Integrations',
+      skills: ['Cloud Databases', 'Customer Records Vault', 'Automatic Data Backups', 'Strict Data Privacy', 'Third-Party Tool Connections']
     },
     {
       category: 'Hosting, Launch & Support',
-      skills: ['Cloud Launch & Domain Setup', 'Security & SSL Certificates', 'Source Code Ownership', 'Maintenance & Support', 'Direct Collaboration']
+      skills: ['Domain & Cloud Setup', 'Security & SSL Certificates', 'Source Code Handover', 'Bug Fixes & Maintenance', 'Direct Developer Collaboration']
     }
   ],
 
-  // 6 Core Solutions & Services
+  // 6 Services (What Can I Build for You?)
   services: [
     {
-      id: 'web-development',
-      title: 'Business Websites & Web Applications',
+      id: 'website-development',
+      title: 'Website Development',
       slug: 'website-development',
-      shortDescription: 'Modern, fast, and mobile-friendly websites designed to build trust and turn visitors into paying customers.',
-      fullDescription: 'Custom, clean, and easy-to-use websites and web apps that look great on any phone or laptop, load in seconds, and make contacting you effortless.',
+      shortDescription: 'Custom, fast, and responsive websites designed to present your business clearly and turn visitors into inquiries.',
+      fullDescription: 'Custom website development designed to match your brand, load quickly, and function seamlessly across phones, tablets, and computers.',
       capabilities: [
-        'Company & Business Websites',
-        'High-Converting Landing Pages',
-        'Customer Portals & Booking Systems',
-        'Mobile-First Responsive Design',
-        'Google Search (SEO) & Speed Optimization'
+        'Business and company websites',
+        'Landing pages and portfolio websites',
+        'Booking and inquiry websites',
+        'E-commerce websites',
+        'Responsive and mobile-friendly interfaces'
       ],
       typicalProblems: [
-        'Outdated or slow website losing customer inquiries',
-        'Need for a credible, professional online presence for a new business',
-        'Desire to give clients a smooth online booking or inquiry experience'
+        'Needing a clean, professional online presence for a new or established business',
+        'Existing website is slow, outdated, or hard to use on mobile phones',
+        'Wanting to collect customer inquiries or bookings directly online'
       ],
       icon: 'Globe'
     },
     {
-      id: 'python-backend',
-      title: 'App Engines & System Connections',
-      slug: 'python-backend',
-      shortDescription: 'The engine that powers your software: user accounts, automatic calculations, notifications, and payment processing.',
-      fullDescription: 'Reliable, secure behind-the-scenes systems that process your business operations, protect user data, and link your app to WhatsApp, SMS, or payments.',
+      id: 'custom-software-development',
+      title: 'Custom Software Development',
+      slug: 'custom-software-development',
+      shortDescription: 'Tailored management systems, administrative dashboards, and database applications built for your specific workflow.',
+      fullDescription: 'Reliable custom software that manages operations, stores records securely, and provides clear admin dashboards tailored to your daily tasks.',
       capabilities: [
-        'Secure User Login & Account Systems',
-        'WhatsApp, SMS & Email Notifications',
-        'Payment Gateway & Online Form Processing',
-        'Automatic Calculations & File Generation',
-        'High-Speed Performance That Never Slows Down'
+        'Business management systems',
+        'Admin dashboards and portals',
+        'Database-driven applications',
+        'Customer and employee management systems',
+        'Custom web applications and APIs'
       ],
       typicalProblems: [
-        'Your website or app needs a safe way to store records and process user actions',
-        'Manual paperwork and disconnected tools needing a central engine',
-        'Need to link your system directly to WhatsApp, email alerts, or payments'
+        'Spreadsheets and manual processes causing errors and lost records',
+        'Off-the-shelf software is overly complex, rigid, or too expensive',
+        'Need for a secure, central portal where team members can manage data'
       ],
       icon: 'Server'
     },
     {
-      id: 'ai-genai-rag',
-      title: 'Smart AI Assistants & Document Search',
-      slug: 'ai-genai-rag',
-      shortDescription: '24/7 digital assistants that read your PDFs, catalogs, or notes and answer customer or team questions accurately.',
-      fullDescription: 'Custom artificial intelligence tools that act like an expert team member available around the clock. They answer questions directly from your company files with zero guesswork.',
+      id: 'ai-llm-solutions',
+      title: 'AI & LLM Solutions',
+      slug: 'ai-llm-solutions',
+      shortDescription: 'Intelligent AI chatbots, document Q&A tools, and search workflows to help teams and customers get instant answers.',
+      fullDescription: 'Practical artificial intelligence tools that answer questions from your company documents, assist customers around the clock, and speed up research.',
       capabilities: [
-        'Instant PDF & Document Question-Answering',
-        '24/7 Smart Customer Support Chatbots',
-        'Shows Exact Document Pages for Every Answer',
-        'Private & Confidential Company Knowledge Search',
-        'Automated Summary & Email Reply Drafting'
+        'AI chatbots and virtual assistants',
+        'Document and PDF question-answering systems',
+        'Retrieval-Augmented Generation (RAG) applications',
+        'AI-powered search tools',
+        'Custom AI workflows and agents'
       ],
       typicalProblems: [
-        'Staff spending hours searching through 500-page PDFs, manuals, or contracts',
-        'Support team overwhelmed answering the same repetitive customer questions',
-        'Desire to add smart, time-saving AI features into your business'
+        'Staff spending excessive time searching through lengthy manuals, PDFs, or contracts',
+        'Repetitive customer inquiries taking up valuable team hours',
+        'Desire to implement smart, helpful AI capabilities into business workflows'
       ],
       icon: 'Bot'
     },
     {
       id: 'business-automation',
-      title: 'Daily Business & Workflow Automation',
+      title: 'Business Automation',
       slug: 'business-automation',
-      shortDescription: 'Eliminate repetitive manual tasks. Automatically capture new leads, send WhatsApp alerts, and update records.',
-      fullDescription: 'Automated helpers that work in the background 24/7 so you never have to waste hours copy-pasting data between spreadsheets and systems.',
+      shortDescription: 'Automated email alerts, follow-up workflows, and data processing that save hours of manual repetitive effort.',
+      fullDescription: 'Streamlined automations that connect your tools, dispatch instant notifications, and run repetitive routines automatically behind the scenes.',
       capabilities: [
-        'Instant WhatsApp & Email Inbound Lead Alerts',
-        'Automated Customer Reminders & Follow-Ups',
-        'Elimination of Manual Copy-Paste Entry',
-        'Connecting Your Disconnected Business Tools',
-        'Automated Daily Business Summaries'
+        'Automated email and notification systems',
+        'Customer follow-up workflows',
+        'Lead management automation',
+        'Data processing and report generation',
+        'Integrations between business tools'
       ],
       typicalProblems: [
-        'Missing customer inquiries because nobody checked the email inbox in time',
-        'Staff wasting hours copy-pasting numbers across different spreadsheets',
-        'Delayed customer follow-ups causing lost sales deals'
+        'Inbound customer inquiries missed due to delayed manual email checks',
+        'Time wasted manually re-entering data across different systems',
+        'Lack of automated customer follow-ups and notifications'
       ],
       icon: 'Cpu'
     },
     {
-      id: 'startup-mvp',
-      title: 'New Idea & Startup Prototypes (MVP)',
-      slug: 'startup-mvp',
-      shortDescription: 'Have a new business idea? Turn your concept into a working, clickable digital product to show customers and investors.',
-      fullDescription: 'Fast, focused development centered on your core features. Get a real, working app into the hands of real users in weeks rather than months of delay.',
+      id: 'startup-mvp-prototype',
+      title: 'Startup MVP & Prototype Development',
+      slug: 'startup-mvp-prototype',
+      shortDescription: 'Transform concepts into working prototypes and minimum viable products to test with users and stakeholders.',
+      fullDescription: 'Fast, focused development centered on the essential features your product needs so you can demonstrate it, gather real feedback, and iterate quickly.',
       capabilities: [
-        'Clarifying Your Core Idea & User Flow',
-        'Rapid Working Prototype Development',
-        'Simple User Signup & Feedback Collection',
-        'Fast Revisions Based on Real Feedback',
-        'Investor & Partner-Ready Demonstrations'
+        'Turning ideas into working prototypes',
+        'Building minimum viable products (MVPs)',
+        'Developing essential application features',
+        'Creating demonstration products',
+        'Improving products through feedback'
       ],
       typicalProblems: [
-        'Founders stuck in the "idea phase" with no working demo to show people',
-        'Agencies quoting huge budgets or 6-month delays for early-stage ideas',
-        'Need to test whether real customers will pay for an idea before spending big'
+        'Stuck in the idea phase with no tangible demo to present to partners or customers',
+        'Large agency quotes and extended timelines for early-stage validation',
+        'Need to build core features first without unnecessary complications'
       ],
       icon: 'Rocket'
     },
     {
-      id: 'custom-software',
-      title: 'Custom Management Portals & Tools',
-      slug: 'custom-software',
-      shortDescription: 'Tailored administrative dashboards and management tools built around your exact daily business operations.',
-      fullDescription: 'Say goodbye to messy spreadsheets and expensive off-the-shelf software with features you never use. Get a clean, custom portal built for your exact workflow.',
+      id: 'existing-software-support',
+      title: 'Existing Software & Technical Support',
+      slug: 'existing-software-support',
+      shortDescription: 'Website fixes, feature updates, hosting and domain setup, performance tuning, and scoped technical maintenance.',
+      fullDescription: 'Hands-on technical support to keep your digital tools running smoothly, resolve bugs, introduce new features, and handle deployment.',
       capabilities: [
-        'Custom Admin Dashboards & Team Portals',
-        'Customer Lead & Inquiry Tracking Systems',
-        'Task & Project Milestone Trackers',
-        '1-Click Export to Excel & PDF Reports',
-        'Private, Easy-to-Use Team Workspaces'
+        'Website improvements and bug fixes',
+        'Feature additions and integrations',
+        'Deployment and hosting setup',
+        'Performance improvements',
+        'Maintenance based on an agreed scope'
       ],
       typicalProblems: [
-        "Existing software is too expensive, complicated, or doesn't fit your business",
-        'Scattered spreadsheets leading to lost records, errors, and confusion',
-        'Need for a single screen to see everything happening in your business'
+        'Existing site or app has bugs, broken forms, or performance slowdowns',
+        'Need assistance setting up domains, cloud hosting, and secure SSL',
+        'Requiring ongoing technical support on a clear, agreed-upon scope'
       ],
       icon: 'Wrench'
     }
   ] as ServiceItem[],
 
-  // Real Projects & Solutions Built (User's Genuine Projects Explained in Plain Business Language)
+  // Personal Projects & Demonstrations
   projects: [
     {
       id: 'caterserv-hotel-catering',
-      name: 'CaterServ: Hotel & Catering Booking Platform',
+      name: 'CaterServ — Hotel & Catering Booking Platform',
       category: 'Web Development',
-      status: 'Completed',
-      shortDescription: 'A modern, elegant website designed for hotels, restaurants, and catering businesses to showcase menus, banquet halls, and receive online bookings.',
-      problemStatement: 'Hotel and catering businesses frequently lose high-value party and wedding orders because potential clients cannot browse event packages or get fast quotes on their phones.',
-      solution: 'Developed an appetizing, responsive web platform featuring interactive catering packages, full banquet menu displays, online booking forms, and 1-click WhatsApp customer inquiries.',
-      techStack: ['Online Menu Showcase', 'Event Reservation Forms', 'Mobile-Friendly Design', 'Instant WhatsApp Alerts'],
+      status: 'Working Demo',
+      shortDescription: 'A website concept for hotel and catering businesses to present services, display packages, and collect booking inquiries.',
+      problemStatement: 'Hotel and catering businesses frequently lose bookings when potential customers cannot easily browse event packages or submit inquiries on mobile phones.',
+      solution: 'Developed a clean, responsive booking platform concept showcasing event menus, banquet packages, and direct reservation inquiries.',
+      techStack: ['Event Booking Concept', 'Package Showcase', 'Responsive UI', 'WhatsApp Link'],
       features: [
         'Interactive food menu and event catering package showcase',
         'Direct online booking and guest estimate inquiry form',
-        'Mobile-first responsive design that loads fast on all smartphones',
-        '1-click WhatsApp button for instant custom quotation chats'
+        'Mobile-first responsive design that loads quickly on all smartphones',
+        'Direct WhatsApp contact option for custom quotation inquiries'
       ],
       githubUrl: 'https://github.com/sajidinamdar'
     },
     {
       id: 'harit-setu-farmer-platform',
-      name: 'Harit Setu: Digital Platform for Farmers',
+      name: 'Harit Setu — Digital Platform for Farmers',
       category: 'Web Development',
-      status: 'Completed',
-      shortDescription: 'A simple agricultural portal connecting farmers directly with daily market crop prices, weather alerts, and farming guidance.',
-      problemStatement: 'Rural farmers often face unfair middleman pricing, sudden crop losses due to unannounced weather changes, and difficulty finding trusted guidance for crop diseases.',
-      solution: 'Built "Harit Setu" (Green Bridge)—a clear, high-contrast, local-language portal that enables farmers to check daily mandi crop rates, view weather advisories, and get direct farming support without technical complexity.',
-      techStack: ['Farmer-Friendly Portal', 'Daily Mandi Crop Rates', 'Regional Language Support', 'Weather Advisories'],
+      status: 'Prototype',
+      shortDescription: 'An agricultural platform concept designed to help farmers access crop prices, weather information, and farming guidance.',
+      problemStatement: 'Farmers often face challenges accessing daily market crop rates, timely weather updates, and practical guidance for crop health.',
+      solution: 'Built a digital platform prototype featuring high-contrast readability, daily market rate information, and accessible farming advisories.',
+      techStack: ['Agricultural Platform', 'Daily Mandi Rates', 'Weather Advisories', 'Accessible Design'],
       features: [
-        'High-legibility interface designed specifically for rural smartphone users',
+        'High-legibility interface designed for rural and mobile users',
         'Daily agricultural market rates and fair crop pricing updates',
-        'Crop disease troubleshooting and seasonal farming advisories',
+        'Crop health troubleshooting and seasonal farming advisories',
         'Direct helpline and WhatsApp support integration'
       ],
       githubUrl: 'https://github.com/sajidinamdar'
     },
     {
-      id: 'ai-email-sender-automator',
-      name: 'AI Smart Email Writer & Automated Dispatcher',
+      id: 'ai-smart-email-writer',
+      name: 'AI Smart Email Writer',
       category: 'Automation',
-      status: 'Completed',
-      shortDescription: 'An intelligent AI assistant that automatically writes professional, personalized business emails and dispatches them with one click.',
-      problemStatement: 'Business owners and sales executives waste 2 to 3 hours every single day writing repetitive outreach emails, customer follow-ups, and proposal letters from scratch.',
-      solution: 'Created an automated email assistant that turns brief bullet points into polite, persuasive business emails in seconds, tailored to the customer and sent with one click.',
-      techStack: ['Smart AI Email Writer', '1-Click Dispatch', 'Time-Saving Automation', 'Personalized Templates'],
+      status: 'Working Demo',
+      shortDescription: 'An AI-powered tool concept for generating professional emails and supporting email workflows.',
+      problemStatement: 'Drafting repetitive business proposals, customer follow-ups, and professional replies manually consumes hours of work each week.',
+      solution: 'Created an intelligent assistant concept that transforms brief notes into polished, tailored business emails ready for dispatch.',
+      techStack: ['AI Email Drafting', 'Tone Customization', 'Workflow Automation', 'Template Generation'],
       features: [
-        'Generates polite, professional business emails in under 5 seconds',
-        'Automatically adjusts tone for proposals, follow-ups, or inquiries',
-        'One-click sending integration with zero manual copy-pasting',
-        'Saves teams 15+ hours of repetitive typing every week'
+        'Rapid business email generation from brief bullet points',
+        'Custom tone adjustments for proposals, inquiries, and follow-ups',
+        'Time-saving templates for common business communication',
+        'Integrated email workflow demonstration'
       ],
       githubUrl: 'https://github.com/sajidinamdar'
     },
     {
-      id: 'baap-teams-workspace',
-      name: 'Baap Teams: Organization Workspace & Collaboration Hub',
+      id: 'baap-teams-collaboration',
+      name: 'BAAP Teams — Collaboration Platform',
       category: 'Backend',
       status: 'In Development',
-      shortDescription: 'A streamlined team communication and task management workspace for companies to coordinate projects, deadlines, and daily logs.',
-      problemStatement: 'Teams managing projects through scattered WhatsApp groups constantly lose important files, miss deadlines, and struggle to see what tasks coworkers are completing.',
-      solution: 'Engineered a centralized team workspace with dedicated project channels, task assignment boards, daily check-in logs, and secure employee accounts.',
-      techStack: ['Team Workspace', 'Task & Deadline Tracking', 'Secure Employee Logins', 'Project Activity Feeds'],
+      shortDescription: 'A team collaboration application involving communication, task management, and project coordination.',
+      problemStatement: 'Teams managing projects across scattered chat groups struggle to track task ownership, deadlines, and project status.',
+      solution: 'Engineering a centralized team collaboration application with structured communication channels, task tracking boards, and activity logs.',
+      techStack: ['Team Workspace', 'Task Coordination', 'Project Tracking', 'User Authentication'],
       features: [
-        'Dedicated project channels to keep conversations neatly organized',
+        'Project communication channels to keep conversations organized',
         'Task assignments with deadlines, priority levels, and progress tracking',
-        'Clean daily team check-in and activity dashboard for managers',
-        'Secure password logins and role-based permissions for staff'
+        'Team activity overview and daily progress tracking',
+        'Secure user authentication and workspace roles'
       ],
       githubUrl: 'https://github.com/sajidinamdar'
     },
     {
-      id: 'file-url-shortener',
-      name: 'QuickShare: Secure File & Short Link Platform',
+      id: 'quickshare-file-link-sharing',
+      name: 'QuickShare — File & Link Sharing Tool',
       category: 'Automation',
-      status: 'Completed',
-      shortDescription: 'A fast, secure tool to upload documents or files, generate clean short links, and share them effortlessly with clients over WhatsApp or SMS.',
-      problemStatement: 'Sending heavy file attachments over email often fails or bounces, while long, messy cloud links look unprofessional and break in chat messages.',
-      solution: 'Developed a lightweight file and link sharing tool that uploads documents in seconds, creates short branded links, tracks click counts, and offers password protection.',
-      techStack: ['Instant File Uploads', 'Short Branded Links', 'Click Tracking', 'Password-Protected Links'],
+      status: 'Prototype',
+      shortDescription: 'A tool concept for uploading files and sharing links with useful access and sharing features.',
+      problemStatement: 'Sending large file attachments over email often fails, while long, messy cloud links look unprofessional in quick messages.',
+      solution: 'Developed a streamlined file upload and link shortening tool prototype allowing fast uploads, compact links, and access controls.',
+      techStack: ['File Uploads', 'Link Shortening', 'Access Control', 'Download Management'],
       features: [
-        'Fast drag-and-drop file upload with instant short link generation',
-        'Clean, compact links perfect for sharing over WhatsApp and SMS',
-        'Download analytics to see when and how many times files were opened',
-        'Optional password protection and expiration dates on sensitive files'
+        'Fast file upload with clean, compact link generation',
+        'Easy sharing formatted for WhatsApp, email, and messaging',
+        'Download access options and simple link management',
+        'Lightweight, responsive interface'
       ],
       githubUrl: 'https://github.com/sajidinamdar'
     },
     {
       id: 'python-business-chatbot',
-      name: 'Python 24/7 Smart Business Chatbot',
+      name: 'Python Business Chatbot',
       category: 'AI Applications',
-      status: 'Completed',
-      shortDescription: 'An automated 24/7 customer assistant that greets website visitors, answers questions about your services or prices, and captures lead contact info.',
-      problemStatement: 'Visitors who land on websites outside business hours often leave immediately without buying if they cannot get quick answers to basic questions.',
-      solution: 'Created an intelligent automated chatbot that operates 24/7, understands natural customer inquiries, provides instant helpful answers, and collects phone numbers for follow-up.',
-      techStack: ['24/7 Customer Chatbot', 'Lead Contact Capture', 'Instant Answers', 'Mobile-Friendly Widget'],
+      status: 'Working Demo',
+      shortDescription: 'A chatbot demonstration designed to answer common business questions and support customer inquiries.',
+      problemStatement: 'Visitors landing on websites outside regular hours often leave if they cannot get quick answers to basic service or pricing questions.',
+      solution: 'Built an automated chatbot demonstration that answers frequent customer questions and gathers contact details for follow-up.',
+      techStack: ['Customer Inquiries', 'Automated Answers', 'Lead Capture', '24/7 Availability'],
       features: [
-        'Greets visitors and answers questions about prices, timing, and services',
-        'Captures visitor name and phone number for the sales team',
-        'Instantly alerts the business owner via WhatsApp when a new lead is captured',
-        'Lightweight chat bubble that loads smoothly on all phone screens'
+        'Answers common questions about services, pricing, and timing',
+        'Captures visitor contact details for team follow-up',
+        'Lightweight widget designed to operate smoothly on all screen sizes',
+        'Direct inquiry notification trigger'
       ],
       githubUrl: 'https://github.com/sajidinamdar'
     }
   ] as ProjectItem[],
 
-  // 5 Step Process
+  // Development Process (From Idea to Working Solution)
   processSteps: [
     {
       step: '01',
-      title: 'Share Your Idea or Problem',
-      description: 'Tell me about your business challenge, startup idea, or what you want to automate—either through the form or directly on WhatsApp.'
+      title: 'Share Your Requirements',
+      description: 'Explain your idea, business problem, required features, and expected outcome.'
     },
     {
       step: '02',
-      title: 'Friendly Discussion & Feasibility',
-      description: 'We connect directly on your preferred channel (WhatsApp, phone, or email) to explore practical ways to build it and ensure it fits your needs.'
+      title: 'Discuss the Solution',
+      description: 'Review the requirements and identify a practical technical approach.'
     },
     {
       step: '03',
-      title: 'Clear Scope, Timeline & Price',
-      description: 'You receive a clear breakdown of what will be built, realistic delivery dates, and an itemized cost. No hidden fees or confusing jargon.'
+      title: 'Receive a Proposal',
+      description: 'Agree on project scope, deliverables, estimated timeline, price, and payment milestones before development starts.'
     },
     {
       step: '04',
-      title: 'Building & Regular Working Demos',
-      description: 'Your solution is built in phases. You receive regular progress updates and test links to try out features as they are completed.'
+      title: 'Development & Testing',
+      description: 'Build the agreed features, test the application, and provide progress updates according to the project plan.'
     },
     {
       step: '05',
-      title: 'Testing, Launch & Handover',
-      description: 'We test everything thoroughly, launch your site or tool live on the web, and provide simple instructions for day-to-day use.'
+      title: 'Deployment & Handover',
+      description: 'Deploy the solution when applicable, provide the agreed source code and documentation, and discuss any ongoing support requirements.'
     }
   ],
 
-  // Frequently Asked Questions (Clear English, zero technical jargon, short and easy to understand)
+  // Trust & Transparency Principles
+  trustPrinciples: [
+    {
+      title: 'Direct Communication',
+      description: 'Discuss your requirements directly with Sajid.'
+    },
+    {
+      title: 'Clear Project Scope',
+      description: 'Understand the agreed features, deliverables, and limitations before development begins.'
+    },
+    {
+      title: 'Transparent Pricing',
+      description: 'Receive a proposal based on your project requirements.'
+    },
+    {
+      title: 'Progress Updates',
+      description: 'Stay informed about development progress as agreed.'
+    },
+    {
+      title: 'Practical Development',
+      description: 'Focus on the features your project actually needs.'
+    },
+    {
+      title: 'Defined Handover',
+      description: 'Agree on deployment, documentation, source code, and support arrangements before starting.'
+    }
+  ],
+
+  // 9 Concise, Honest FAQs
   faqs: [
     {
-      question: 'What types of projects can I discuss with you?',
-      answer: 'You can discuss any business website, booking platform, online store, custom web app, automated email or file system, or smart AI chatbot. Whether you have a complete plan or just an idea, we can discuss how to build it.'
+      question: 'What types of projects can you build?',
+      answer: 'I work on business websites, custom web applications, management systems, AI chatbots, automation tools, and software prototypes. The solution depends on your requirements.'
     },
     {
-      question: 'Will my website work on mobile phones, tablets, and desktops?',
-      answer: 'Yes, 100%. Every website and application I build automatically adjusts to look great and work smoothly on all screen sizes, including phones, tablets, laptops, and desktop computers.'
+      question: 'Do you accept projects based on new ideas?',
+      answer: 'Yes. You can share an idea even if you do not have a complete technical plan. We can discuss the requirements, features, and a practical development approach.'
     },
     {
-      question: 'I am not a technical person. Can you help me understand what I need?',
-      answer: 'Absolutely! You do not need any technical knowledge. You just describe your business problem or goal, and I will recommend the right solution and handle all the design and coding for you in simple, plain terms.'
+      question: 'Have you worked with clients before?',
+      answer: 'Sajid Innovations is a new brand, and its current portfolio focuses on personal projects and software demonstrations. You can review the available work to understand my approach and technical capabilities.'
     },
     {
-      question: 'Do you build both the frontend and backend of an application?',
-      answer: 'Yes. I handle everything end-to-end—from the visible screens and buttons your customers interact with, to the behind-the-scenes systems that manage user accounts, databases, and secure payments.'
+      question: 'How much does a project cost?',
+      answer: 'Pricing depends on the scope, features, integrations, complexity, and delivery requirements. I provide a proposal after understanding the project.'
     },
     {
-      question: 'How does the project discussion process work?',
-      answer: 'After you reach out, I review your idea and message you directly on WhatsApp or email. We then have a friendly, no-pressure chat or quick call to clarify your goals and map out a simple plan before starting.'
+      question: 'How long does development take?',
+      answer: 'The timeline depends on the project scope and complexity. An estimated schedule will be discussed before development begins.'
     },
     {
-      question: 'How is the project budget and pricing decided?',
-      answer: 'Pricing is transparent and based strictly on the features you need, without hidden fees or expensive agency markups. We agree on a clear, fixed quote before starting any work.'
+      question: 'Can you build both frontend and backend systems?',
+      answer: 'Yes, depending on the project requirements, I can work on user interfaces, backend APIs, databases, integrations, and deployment.'
     },
     {
-      question: 'How long does a typical project take to build?',
-      answer: 'A standard business website usually takes 1 to 2 weeks, while custom applications, booking platforms, or smart AI tools typically take 3 to 5 weeks depending on the features.'
+      question: 'Will I receive the source code?',
+      answer: 'Source-code ownership and handover terms will be agreed upon before development begins, including any applicable third-party licences.'
     },
     {
-      question: 'Can you update or fix an existing website or application?',
-      answer: 'Yes. If you already have a website that needs bug fixes, new features, speed improvements, or a fresh modern look, I can review and upgrade it for you.'
+      question: 'Do you provide maintenance?',
+      answer: 'Maintenance, updates, bug fixes, and technical support can be discussed as part of the project or a separate agreement.'
     },
     {
-      question: 'How do you protect my business data and project information?',
-      answer: 'Your data and project ideas are kept strictly confidential. I follow industry standard security practices, use encrypted connections, and never share your business details or ideas with anyone.'
-    },
-    {
-      question: 'Do you provide hosting, domain setup, deployment, and maintenance?',
-      answer: 'Yes. I handle the entire launch process—connecting your custom domain, setting up secure hosting, making the website live, and providing ongoing support and maintenance whenever needed.'
-    },
-    {
-      question: 'What happens after I submit an inquiry through your website?',
-      answer: 'You receive an instant confirmation on screen with a unique inquiry ID, a copy is sent to your email, and I will personally reach out to you within a few hours to discuss next steps.'
+      question: 'How can I start a project?',
+      answer: 'Use the project inquiry form or contact me directly. Share your idea, expected features, estimated budget, and preferred timeline.'
     }
   ] as FAQItem[],
 
-  // Service options for form dropdown (Plain English)
+  // Service options for inquiry form dropdown
   serviceCategories: [
-    'Business Website or Landing Page',
-    'Web Application / Client Portal',
-    'Custom App Engine & User Accounts',
-    'Smart AI Chatbot & Customer Support',
-    'Smart Document Search (PDF Q&A Assistant)',
-    'Business Process & WhatsApp Automation',
-    'New Startup Idea / Prototype (MVP)',
-    'Custom Business Management Dashboard',
-    'General Question or Other'
+    'Website Development',
+    'Custom Software Development',
+    'AI & LLM Solutions',
+    'Business Automation',
+    'Startup MVP & Prototype Development',
+    'Existing Software & Technical Support',
+    'Other / Custom Requirement'
   ],
 
   // Indicative budget bands
   budgetOptions: [
     'Not decided yet',
-    'Under ₹10,000',
-    '₹10,000 – ₹25,000',
-    '₹25,000 – ₹50,000',
-    '₹50,000 – ₹1,00,000',
-    'Above ₹1,00,000',
-    'Prefer to discuss custom budget'
+    'Under ₹15,000',
+    '₹15,000 – ₹35,000',
+    '₹35,000 – ₹75,000',
+    '₹75,000 – ₹1,50,000',
+    'Above ₹1,50,000',
+    'Prefer to discuss custom proposal'
   ],
 
   // Timeline preferences
@@ -404,17 +433,17 @@ export const siteConfig = {
 
   // Helper for generating encoded WhatsApp links
   getWhatsAppUrl(customMessage?: string): string {
-    const text = customMessage || "Hi Sajid! I visited your portfolio and would like to discuss a project idea.";
+    const text = customMessage || "Hi Sajid! I visited Sajid Innovations and would like to discuss a project.";
     return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(text)}`;
   },
 
   getServiceWhatsAppUrl(serviceTitle: string): string {
-    const text = `Hi Sajid! I visited your portfolio and would like to discuss a project regarding ${serviceTitle}.`;
+    const text = `Hi Sajid! I visited Sajid Innovations and would like to discuss a project regarding ${serviceTitle}.`;
     return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(text)}`;
   },
 
   getInquiryWhatsAppUrl(refId: string, projectTitle: string): string {
-    const text = `Hi Sajid! I just submitted an idea on your website for "${projectTitle}". My reference ID is ${refId}.`;
+    const text = `Hi Sajid! I just submitted an inquiry on your website for "${projectTitle}". My reference ID is ${refId}.`;
     return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(text)}`;
   }
 };

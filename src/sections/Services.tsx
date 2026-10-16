@@ -37,15 +37,15 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
         <div className="max-w-3xl mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-            <span>Solutions & Capabilities</span>
+            <span>Custom Services</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">
-            What Can We Build Together?
+            What Can I Build for You?
           </h2>
 
           <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
-            Whether you need a high-converting website, automated WhatsApp alerts, a smart AI document assistant, or a working prototype for a new idea, here are the real problems I solve.
+            Every business and idea has different requirements. I work on custom solutions based on the problem you want to solve.
           </p>
         </div>
 

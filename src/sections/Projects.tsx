@@ -21,10 +21,10 @@ export const Projects: React.FC = () => {
 
   const getStatusColor = (status: ProjectItem['status']) => {
     switch (status) {
-      case 'Completed': return 'text-emerald-400 border-emerald-800/60 bg-emerald-950/40';
+      case 'Working Demo': return 'text-emerald-400 border-emerald-800/60 bg-emerald-950/40';
       case 'In Development': return 'text-blue-400 border-blue-800/60 bg-blue-950/40';
       case 'Prototype': return 'text-amber-400 border-amber-800/60 bg-amber-950/40';
-      case 'Concept': return 'text-purple-400 border-purple-800/60 bg-purple-950/40';
+      case 'Personal Project': return 'text-purple-400 border-purple-800/60 bg-purple-950/40';
       default: return 'text-slate-400 border-slate-800 bg-slate-900';
     }
   };
@@ -36,15 +36,15 @@ export const Projects: React.FC = () => {
         <div className="max-w-3xl mb-12 space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-            <span>Proven Solutions</span>
+            <span>Developer Portfolio</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">
-            Real Solutions & Working Projects
+            Personal Projects & Demonstrations
           </h2>
 
           <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
-            Real-world websites, automated systems, and smart AI tools built to solve genuine business bottlenecks.
+            Explore projects I've developed or am developing to demonstrate my technical skills, experiment with technologies, and explore solutions to practical problems. These projects represent my own development work and demonstrations.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export const Projects: React.FC = () => {
               className="flex flex-col justify-between bg-[#0E1523] border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-8 transition-all duration-200 group"
             >
               <div>
-                {/* Unboxed Metadata (Zero-pill discipline) */}
+                {/* Status & Category */}
                 <div className="flex items-center justify-between text-xs text-slate-400 mb-4">
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-blue-400">{project.category}</span>
@@ -84,70 +84,73 @@ export const Projects: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                   {project.name}
                 </h3>
 
-                <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                <p className="text-sm text-slate-300 leading-relaxed mb-5">
                   {project.shortDescription}
                 </p>
 
-                {/* Problem vs Solution Split */}
-                <div className="space-y-3.5 mb-6 text-xs text-slate-400">
+                {/* Problem Addressed & What It Does */}
+                <div className="space-y-3 mb-5 text-xs text-slate-400">
                   <div className="p-3.5 rounded-lg bg-slate-950/60 border border-slate-800/70">
-                    <span className="font-semibold text-slate-300 block mb-1">The Business Challenge:</span>
+                    <span className="font-semibold text-slate-300 block mb-1">Problem Addressed:</span>
                     <p className="leading-relaxed">{project.problemStatement}</p>
                   </div>
                   <div className="p-3.5 rounded-lg bg-slate-950/60 border border-slate-800/70">
-                    <span className="font-semibold text-slate-300 block mb-1">How It Was Solved:</span>
+                    <span className="font-semibold text-slate-300 block mb-1">What It Does & Approach:</span>
                     <p className="leading-relaxed">{project.solution}</p>
                   </div>
                 </div>
 
-                {/* Key Capabilities Chips */}
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {project.techStack.map((tech, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="px-2 py-0.5 text-[11px] font-medium text-slate-300 bg-slate-900 border border-slate-800 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                {/* Technologies used */}
+                <div className="mb-6">
+                  <span className="text-[11px] font-semibold text-slate-400 block mb-1.5 uppercase tracking-wider">Technologies Used:</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.techStack.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-2 py-0.5 text-[11px] font-medium text-slate-300 bg-slate-900 border border-slate-800 rounded"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Bottom links */}
-              <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              {/* Bottom buttons: View Project & View Source Code */}
+              <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
                 <button
                   onClick={() => setSelectedProject(project)}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
                 >
-                  <span>Explore Solution Details</span>
+                  <span>Explore Details</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                  {(project.demoUrl || project.liveUrl) && (
+                    <a
+                      href={project.demoUrl || project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>View Project</span>
+                    </a>
+                  )}
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-slate-400 hover:text-white rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors"
-                      aria-label="View source repository"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors"
                     >
-                      <Github className="w-4 h-4" />
-                    </a>
-                  )}
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 text-slate-400 hover:text-white rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors"
-                      aria-label="View live demonstration"
-                    >
-                      <ExternalLink className="w-4 h-4" />
+                      <Github className="w-3.5 h-3.5" />
+                      <span>View Source Code</span>
                     </a>
                   )}
                 </div>

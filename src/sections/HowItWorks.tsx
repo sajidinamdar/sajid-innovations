@@ -14,15 +14,15 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenIdeaModal }) => {
         <div className="max-w-3xl mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-            <span>Workflow & Delivery</span>
+            <span>Development Process</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">
-            From Idea to Working Product
+            From Idea to Working Solution
           </h2>
 
           <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
-            A transparent, 5-stage collaboration process designed to turn business requirements into reliable software without surprises.
+            A clear, structured 5-step approach to discuss requirements, build agreed features, and deliver working solutions.
           </p>
         </div>
 

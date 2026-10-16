@@ -20,13 +20,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
           {/* Left Column: Core Value Proposition */}
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-blue-400 bg-blue-950/40 border border-blue-800/40 rounded-full">
-              <span>Websites, Custom Apps & Smart AI</span>
+              <span>{siteConfig.brandPositioning}</span>
               <span aria-hidden="true">·</span>
-              <span>Built by Sajid Inamdar</span>
+              <span>Founder: {siteConfig.founderName}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-[1.12]">
-              Have an Idea? <br />
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-[1.15]">
+              Have a Business Idea? <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500">
                 Let's Build It.
               </span>
@@ -41,12 +41,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
             </p>
 
             {/* CTAs */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="pt-2 flex flex-wrap items-center gap-3.5">
               <button
                 onClick={onOpenIdeaModal}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-lg shadow-lg shadow-blue-600/25 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
               >
-                <span>Share Your Idea</span>
+                <span>Discuss Your Project</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>
 
@@ -54,34 +54,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
                 href="#projects"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-lg transition-all duration-150"
               >
-                <span>Explore Solutions Built</span>
+                <span>Explore My Projects</span>
               </a>
 
               <a
-                href={siteConfig.getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 bg-emerald-950/30 hover:bg-emerald-950/50 border border-emerald-900/50 rounded-lg transition-all duration-150"
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-medium text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-800 rounded-lg transition-all duration-150"
               >
-                <MessageSquare className="w-4 h-4" />
-                <span>Chat on WhatsApp</span>
+                <span>Contact Me</span>
               </a>
             </div>
 
-            {/* Honest Trust Indicators */}
-            <div className="pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs text-slate-400">
-              <div>
-                <span className="block font-semibold text-slate-200">Complete Digital Product</span>
-                <span className="text-slate-500">From screens to backend & database</span>
-              </div>
-              <div>
-                <span className="block font-semibold text-slate-200">Smart AI Capabilities</span>
-                <span className="text-slate-500">24/7 chatbots & document search</span>
-              </div>
-              <div>
-                <span className="block font-semibold text-slate-200">Direct Collaboration</span>
-                <span className="text-slate-500">Speak directly with the developer</span>
-              </div>
+            {/* Supporting Text */}
+            <div className="pt-5 border-t border-slate-800/80 text-xs sm:text-sm text-slate-400 leading-relaxed">
+              {siteConfig.heroSupportingText}
             </div>
           </div>
 

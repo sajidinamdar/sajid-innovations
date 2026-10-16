@@ -19,11 +19,15 @@ export const Contact: React.FC<ContactProps> = ({ onOpenIdeaModal }) => {
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">
-              Let's Talk About Your Project
+              Let's Discuss Your Project
             </h2>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-              Have a project idea, a business challenge, or a new software tool you want built? Reach out directly via WhatsApp, email, or phone. You speak directly with me—the engineer building your solution.
+            <div className="text-lg font-medium text-slate-200">
+              Have an idea, a business problem, or a software requirement?
+            </div>
+
+            <p className="text-base text-slate-300 leading-relaxed">
+              Tell me what you want to build. I'll review your requirements and discuss the possible approach, estimated scope, and next steps.
             </p>
 
             {/* Direct Channel Cards */}

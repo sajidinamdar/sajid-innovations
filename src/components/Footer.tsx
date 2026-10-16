@@ -24,15 +24,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
               />
               <div className="flex flex-col text-left">
                 <span className="text-base font-bold text-white tracking-tight leading-tight">{siteConfig.brandName}</span>
-                <span className="text-[11px] text-slate-400 font-normal leading-tight">{siteConfig.brandSubtitle}</span>
+                <span className="text-[11px] text-slate-400 font-normal leading-tight">{siteConfig.brandPositioning}</span>
               </div>
             </div>
-            <p className="text-xs text-slate-500 font-medium">
-              {siteConfig.brandTagline}
-            </p>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Turning practical business ideas and daily bottlenecks into high-converting websites, custom applications, smart AI tools, and working startup prototypes.
+              Building practical websites, custom applications, intelligent tools, and digital products based on real requirements.
             </p>
+            <div className="text-xs text-slate-400 font-medium">
+              Founder: <span className="text-white font-semibold">{siteConfig.founderName}</span>
+            </div>
             <div className="text-xs text-slate-500">
               {siteConfig.location} · {siteConfig.timezone}
             </div>
@@ -45,22 +45,22 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <a href="#about" className="hover:text-white transition-colors">About Sajid</a>
+                <a href="#about" className="hover:text-white transition-colors">About</a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">Services & Solutions</a>
+                <a href="#services" className="hover:text-white transition-colors">Services</a>
               </li>
               <li>
-                <a href="#projects" className="hover:text-white transition-colors">Solutions & Projects</a>
+                <a href="#projects" className="hover:text-white transition-colors">Projects</a>
               </li>
               <li>
                 <a href="#process" className="hover:text-white transition-colors">How It Works</a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-white transition-colors">Common Questions</a>
+                <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors">Direct Contact</a>
+                <a href="#contact" className="hover:text-white transition-colors">Contact</a>
               </li>
             </ul>
           </div>
@@ -154,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
         {/* Bottom bar */}
         <div className="pt-8 border-t border-slate-900/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex items-center gap-3">
-            <span>© {currentYear} Sajid Inamdar. All rights reserved.</span>
+            <span>© {currentYear} {siteConfig.brandName}. All rights reserved.</span>
             <span>·</span>
             <span className="text-slate-600">No cookies or tracking pixels collected</span>
           </div>

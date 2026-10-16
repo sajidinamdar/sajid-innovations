@@ -11,17 +11,21 @@ export const About: React.FC = () => {
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-              <span>About the Developer</span>
+              <span>Founder-Led Brand</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white text-balance">
-              A Developer Who Loves Turning Problems Into Solutions
+              {siteConfig.aboutHeading}
             </h2>
 
             <div className="space-y-4 text-slate-300 text-base leading-relaxed">
               {siteConfig.aboutParagraphs.map((paragraph, idx) => (
                 <p key={idx}>{paragraph}</p>
               ))}
+            </div>
+
+            <div className="text-xs font-semibold text-slate-400 pt-1">
+              Founder: <span className="text-white font-bold">{siteConfig.founderName}</span>
             </div>
 
             {/* Quick Action Links */}

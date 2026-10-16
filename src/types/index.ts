@@ -53,7 +53,7 @@ export interface ServiceItem {
   icon: string;
 }
 
-export type ProjectStatus = 'Completed' | 'In Development' | 'Prototype' | 'Concept';
+export type ProjectStatus = 'Personal Project' | 'Working Demo' | 'Prototype' | 'In Development' | 'Completed';
 
 export interface ProjectItem {
   id: string;
@@ -65,6 +65,7 @@ export interface ProjectItem {
   solution: string;
   techStack: string[];
   features: string[];
+  demoUrl?: string;
   liveUrl?: string;
   githubUrl?: string;
 }
