@@ -160,6 +160,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
           </div>
 
           <div className="flex items-center gap-6">
+            <a
+              href="/sitemap.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-slate-300 transition-colors"
+            >
+              Sitemap
+            </a>
             <button
               onClick={onOpenPrivacyModal}
               className="hover:text-slate-300 transition-colors cursor-pointer flex items-center gap-1"
