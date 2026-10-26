@@ -267,6 +267,94 @@ export function extractBearerToken(authHeader?: string): string | null {
 }
 
 /**
+ * Validates whether an incoming HTTP Origin is an authorized administrative origin.
+ * Strictly permits:
+ * 1. Production domains (HTTPS only): https://sajidinnovations.in, https://www.sajidinnovations.in
+ * 2. Vercel deployment & preview domains (HTTPS only): *.vercel.app (including vercel.app)
+ * 3. Localhost development environments: http://localhost:*, http://127.0.0.1:*
+ * 4. Current deployment host from process.env.VERCEL_URL if defined
+ *
+ * Rejects:
+ * - Untrusted third-party origins (e.g., malicious-domain.com)
+ * - Suffix spoofing (e.g., evil-vercel.app or *.vercel.app.attacker.com)
+ * - Insecure HTTP origins for production or preview domains
+ */
+export function isAllowedAdminOrigin(origin?: string): boolean {
+  if (!origin || typeof origin !== 'string') return false;
+
+  try {
+    const url = new URL(origin);
+    const hostname = url.hostname.toLowerCase();
+
+    // Production domain verification (strict HTTPS)
+    if (url.protocol === 'https:' && (hostname === 'sajidinnovations.in' || hostname === 'www.sajidinnovations.in')) {
+      return true;
+    }
+
+    // Dynamic Vercel preview & production deployment URLs (*.vercel.app with strict HTTPS)
+    if (url.protocol === 'https:' && (hostname === 'vercel.app' || hostname.endsWith('.vercel.app'))) {
+      return true;
+    }
+
+    // Local development origins
+    if ((url.protocol === 'http:' || url.protocol === 'https:') && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+      return true;
+    }
+
+    // Current Vercel deployment URL if injected by platform
+    if (process.env.VERCEL_URL) {
+      const vercelHost = process.env.VERCEL_URL.replace(/^https?:\/\//, '').split('/')[0].toLowerCase();
+      if (hostname === vercelHost && url.protocol === 'https:') {
+        return true;
+      }
+    }
+
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Applies restricted CORS headers for administrative API routes.
+ * Replaces wildcard '*' with strict origin validation to prevent unauthorized cross-origin access.
+ * Returns false if the request was an OPTIONS preflight and handled, true if processing should continue.
+ */
+export function applyAdminCors(req: any, res: any, allowedMethods: string = 'GET, OPTIONS'): boolean {
+  const origin = req.headers?.origin;
+
+  if (origin && isAllowedAdminOrigin(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', allowedMethods);
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Max-Age', '86400');
+  }
+
+  if (req.method === 'OPTIONS') {
+    if (origin && !isAllowedAdminOrigin(origin)) {
+      if (typeof res.status === 'function') {
+        res.status(403).json({ error: 'Origin not allowed' });
+      } else {
+        res.statusCode = 403;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Origin not allowed' }));
+      }
+      return false;
+    }
+    if (typeof res.status === 'function') {
+      res.status(204).end();
+    } else {
+      res.statusCode = 204;
+      res.end();
+    }
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Helper to clear local in-memory cache strictly for test simulation of independent instances
  */
 export function _clearRevocationMemoryForTesting(): void {

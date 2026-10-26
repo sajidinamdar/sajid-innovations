@@ -1,12 +1,8 @@
-import { extractBearerToken, verifySessionToken } from '../../../src/server/auth.ts';
+import { extractBearerToken, verifySessionToken, applyAdminCors } from '../../../src/server/auth.ts';
 import { fetchInquiryById, updateInquiryDetails, removeInquiry } from '../../../src/server/db.ts';
 
 export default async function handler(req: any, res: any) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (!applyAdminCors(req, res, 'GET, PATCH, DELETE, OPTIONS')) return;
 
   const token = extractBearerToken(req.headers['authorization']);
   if (!token) {

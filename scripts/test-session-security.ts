@@ -9,8 +9,16 @@ import {
   revokeSessionToken,
   extractBearerToken,
   hashToken,
-  _clearRevocationMemoryForTesting
+  _clearRevocationMemoryForTesting,
+  isAllowedAdminOrigin,
+  applyAdminCors
 } from '../src/server/auth.ts';
+import {
+  checkLoginRateLimit,
+  getClientIp,
+  _resetRateLimitsForTesting,
+  MAX_LOGIN_ATTEMPTS
+} from '../api/auth/login.ts';
 import { isTokenRevokedInDb, getNeonSql } from '../src/server/db.ts';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
@@ -203,6 +211,85 @@ async function runSessionSecuritySuite() {
     });
     assert(expAuth.status === 401, `${ep.method} ${ep.url.replace(baseUrl, '')} returns 401 with expired token`);
   }
+
+  // --- 6. ADMIN CORS ORIGIN RESTRICTION TESTS ---
+  console.log('\n--- 6. Admin CORS Origin Restriction Tests ---');
+  assert(isAllowedAdminOrigin('https://sajidinnovations.in') === true, 'Production apex domain is allowed');
+  assert(isAllowedAdminOrigin('https://www.sajidinnovations.in') === true, 'Production www domain is allowed');
+  assert(isAllowedAdminOrigin('http://sajidinnovations.in') === false, 'Insecure HTTP production domain is strictly rejected');
+  assert(isAllowedAdminOrigin('https://sajid-innovations-preview-123.vercel.app') === true, 'Vercel preview deployment is allowed');
+  assert(isAllowedAdminOrigin('https://any-branch-name.vercel.app') === true, 'Vercel branch deployment is allowed');
+  assert(isAllowedAdminOrigin('http://localhost:3000') === true, 'Localhost 3000 is allowed');
+  assert(isAllowedAdminOrigin('http://127.0.0.1:5173') === true, 'Localhost 5173 is allowed');
+  assert(isAllowedAdminOrigin('https://malicious-site.com') === false, 'Untrusted origin is strictly rejected');
+  assert(isAllowedAdminOrigin('https://sajidinnovations.in.evil.com') === false, 'Domain suffix spoofing is strictly rejected');
+  assert(isAllowedAdminOrigin('https://evil-vercel.app.attacker.com') === false, 'Vercel preview spoofing is strictly rejected');
+  assert(isAllowedAdminOrigin(undefined) === false, 'Undefined origin returns false');
+
+  // Verify applyAdminCors behavior
+  const mockHeaders: Record<string, string> = {};
+  const mockRes: any = {
+    statusCode: 200,
+    setHeader: (k: string, v: string) => { mockHeaders[k] = v; },
+    status: function(code: number) { this.statusCode = code; return this; },
+    json: function() { return this; },
+    end: function() { return this; }
+  };
+
+  // 6A: Same-origin request without Origin header -> No Access-Control-Allow-Origin: *
+  delete mockHeaders['Access-Control-Allow-Origin'];
+  applyAdminCors({ method: 'GET', headers: {} }, mockRes, 'GET, OPTIONS');
+  assert(mockHeaders['Access-Control-Allow-Origin'] === undefined, 'Same-origin request does not set wildcard or unnecessary CORS');
+
+  // 6B: Trusted origin request -> sets matching origin, never wildcard *
+  mockRes.statusCode = 200;
+  applyAdminCors({ method: 'GET', headers: { origin: 'https://sajidinnovations.in' } }, mockRes, 'GET, OPTIONS');
+  assert(mockHeaders['Access-Control-Allow-Origin'] === 'https://sajidinnovations.in', 'Allowed origin reflects exact trusted origin');
+  assert(mockHeaders['Access-Control-Allow-Origin'] !== '*', 'Wildcard Access-Control-Allow-Origin: * is completely eliminated');
+  assert(mockHeaders['Vary'] === 'Origin', 'Sets Vary: Origin for proper cache partitioning');
+
+  // 6C: Untrusted origin OPTIONS preflight -> returns 403 Forbidden
+  let rejectedPreflightCode = 200;
+  const mockRejectRes: any = {
+    statusCode: 200,
+    setHeader: () => {},
+    status: function(code: number) { rejectedPreflightCode = code; return this; },
+    json: function() { return this; },
+    end: function() { return this; }
+  };
+  const preflightHandled = applyAdminCors({ method: 'OPTIONS', headers: { origin: 'https://evil.com' } }, mockRejectRes, 'GET, OPTIONS');
+  assert(preflightHandled === false, 'Untrusted preflight halts request execution');
+  assert(rejectedPreflightCode === 403, 'Untrusted preflight returns HTTP 403 Forbidden');
+
+  // --- 7. LOGIN RATE LIMITING & CLIENT IP EXTRACTION TESTS ---
+  console.log('\n--- 7. Login Rate Limiting & Client IP Extraction Tests ---');
+  _resetRateLimitsForTesting();
+
+  // 7A: IP extraction handles proxies and Vercel edge headers
+  const mockReqForwarded = { headers: { 'x-forwarded-for': '203.0.113.195, 70.41.3.18, 150.172.238.178' } };
+  assert(getClientIp(mockReqForwarded) === '203.0.113.195', 'Extracts genuine client IP from first x-forwarded-for entry');
+
+  const mockReqRealIp = { headers: { 'x-real-ip': '198.51.100.42' } };
+  assert(getClientIp(mockReqRealIp) === '198.51.100.42', 'Extracts client IP from x-real-ip header');
+
+  // 7B: Allows attempts within MAX_LOGIN_ATTEMPTS threshold
+  const testIp = '192.0.2.100';
+  for (let i = 1; i <= MAX_LOGIN_ATTEMPTS; i++) {
+    const res = checkLoginRateLimit(testIp);
+    assert(res.allowed === true, `Attempt ${i}/${MAX_LOGIN_ATTEMPTS} is allowed`);
+    assert(res.remaining === MAX_LOGIN_ATTEMPTS - i, `Attempt ${i} remaining correctly reports ${MAX_LOGIN_ATTEMPTS - i}`);
+  }
+
+  // 7C: Blocks attempt when threshold exceeded
+  const blockedRes = checkLoginRateLimit(testIp);
+  assert(blockedRes.allowed === false, 'Attempt exceeding MAX_LOGIN_ATTEMPTS is strictly blocked');
+  assert(blockedRes.remaining === 0, 'Remaining attempts reported as 0');
+  assert(blockedRes.retryAfterSeconds > 0 && blockedRes.retryAfterSeconds <= 60, 'Returns valid retryAfterSeconds window (1-60s)');
+
+  // 7D: Different IP is not blocked (per-IP isolation)
+  const differentIpRes = checkLoginRateLimit('192.0.2.101');
+  assert(differentIpRes.allowed === true, 'Different client IP is evaluated independently');
+  _resetRateLimitsForTesting();
 
   console.log('\n====================================================');
   console.log(`Session Security Results: ${passed} passed, ${failed} failed`);
