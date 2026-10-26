@@ -67,6 +67,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenIdeaModal }) => {
           <img
             src="/logo.png"
             alt={siteConfig.brandName}
+            width={44}
+            height={44}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200"
           />
           <div className="flex flex-col text-left">

@@ -21,6 +21,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPrivacyModal, onNavigateTo
               <img
                 src="/logo.png"
                 alt={siteConfig.brandName}
+                width={40}
+                height={40}
+                loading="lazy"
+                decoding="async"
                 className="w-10 h-10 object-contain rounded-full shadow-sm"
               />
               <div className="flex flex-col text-left">
