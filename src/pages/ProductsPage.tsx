@@ -86,6 +86,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenIdeaModal }) =
                   <img
                     src="/sajinova-lab-icon.png"
                     alt={sajinova.name}
+                    width={80}
+                    height={80}
+                    loading="lazy"
+                    decoding="async"
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover bg-slate-900 p-1 border border-blue-500/30 shadow-lg shadow-blue-500/10 shrink-0"
                   />
                   <div>

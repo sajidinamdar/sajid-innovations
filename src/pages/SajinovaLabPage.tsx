@@ -147,6 +147,10 @@ export const SajinovaLabPage: React.FC<SajinovaLabPageProps> = ({ onOpenDemoRequ
                 <img
                   src="/sajinova-lab-icon.png"
                   alt="Sajinova Lab"
+                  width={64}
+                  height={64}
+                  loading="eager"
+                  decoding="async"
                   className="w-16 h-16 rounded-2xl object-cover bg-slate-900 p-1 border border-blue-500/30 shadow-md shrink-0"
                 />
                 <div>

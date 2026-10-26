@@ -64,6 +64,10 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onOpenDemoRequ
                   <img
                     src="/sajinova-lab-icon.png"
                     alt={sajinova.name}
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
                     className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-cover bg-slate-900 p-1 border border-blue-500/30 shadow-lg shadow-blue-500/10 shrink-0"
                   />
                   <div>
