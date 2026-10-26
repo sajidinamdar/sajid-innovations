@@ -17,7 +17,7 @@ export const Projects: React.FC = () => {
 
   const filteredProjects = activeFilter === 'All Projects'
     ? siteConfig.projects
-    : siteConfig.projects.filter(p => p.category === activeFilter);
+    : siteConfig.projects.filter((p: ProjectItem) => p.category === activeFilter);
 
   const getStatusColor = (status: ProjectItem['status']) => {
     switch (status) {
@@ -36,7 +36,7 @@ export const Projects: React.FC = () => {
         <div className="max-w-3xl mb-8 sm:mb-12 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-            <span>Developer Portfolio</span>
+            <span>Selected Projects</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white text-balance">

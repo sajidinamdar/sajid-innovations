@@ -1,20 +1,21 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, Code2, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2, ShieldCheck, User } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-14 sm:py-20 md:py-28 bg-[#090D14] border-t border-slate-900">
+    <section id="about" className="py-16 sm:py-20 md:py-28 bg-[#090D14] border-t border-slate-900/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Bio & Philosophy */}
-          <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-              <span>Founder-Led Brand</span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Bio & Core Mission */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              <span>About Sajid Innovations</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white text-balance">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white text-balance">
               {siteConfig.aboutHeading}
             </h2>
 
@@ -24,67 +25,67 @@ export const About: React.FC = () => {
               ))}
             </div>
 
-            <div className="text-xs font-semibold text-slate-400 pt-1">
-              Founder: <span className="text-white font-bold">{siteConfig.founderName}</span>
+            <div className="flex items-center gap-3 pt-2">
+              <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400">
+                <User className="w-5 h-5" />
+              </div>
+              <div className="text-xs">
+                <div className="text-white font-bold">{siteConfig.founderName}</div>
+                <div className="text-slate-400">{siteConfig.founderRole} · Ahilyanagar, Maharashtra, India</div>
+              </div>
             </div>
 
             {/* Quick Action Links */}
-            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <a
-                href="#projects"
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 rounded-xl sm:rounded-lg bg-slate-900 border border-slate-800 text-slate-200 hover:text-white hover:border-slate-700 transition-colors text-sm font-medium min-h-[44px]"
+            <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <Link
+                to="/about"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-600/25 min-h-[44px]"
               >
-                <Code2 className="w-4 h-4 text-blue-400" />
-                <span>See Past Work & Solutions</span>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-500" />
-              </a>
+                <span>Learn More About Sajid Innovations</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
 
-              <a
-                href={siteConfig.getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-2.5 rounded-xl sm:rounded-lg text-emerald-400 hover:text-emerald-300 bg-emerald-950/20 sm:bg-transparent border border-emerald-900/40 sm:border-transparent text-sm font-medium transition-colors min-h-[44px]"
+              <Link
+                to="/enquire/general"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white text-sm font-medium transition-colors min-h-[44px]"
               >
-                <MessageSquare className="w-4 h-4" />
-                <span>Chat on WhatsApp</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+                <span>Get in Touch</span>
+              </Link>
             </div>
           </div>
 
-          {/* Right Column: Technology Matrix */}
-          <div className="lg:col-span-6 bg-[#0E1523] border border-slate-800 rounded-2xl p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-white font-semibold text-sm sm:text-base">
-                <Code2 className="w-5 h-5 text-blue-400" />
-                <span>What I Build & Deliver</span>
-              </div>
-              <span className="text-xs text-slate-400">Reliable & Easy to Maintain</span>
+          {/* Right Column: Two Business Directions Breakdown */}
+          <div className="lg:col-span-5 bg-gradient-to-b from-[#111827] to-[#0D131F] border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
+            <div className="pb-4 border-b border-slate-800">
+              <h3 className="text-base font-bold text-white mb-1">Our Two Business Directions</h3>
+              <p className="text-xs text-slate-400">One technology brand with dedicated focus areas</p>
             </div>
 
-            <div className="space-y-6">
-              {siteConfig.techStackGroups.map((group, idx) => (
-                <div key={idx} className="space-y-2">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    {group.category}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="px-2.5 py-1 text-xs font-medium text-slate-300 bg-slate-900/90 border border-slate-800 rounded-md"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+            <div className="space-y-4">
+              <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/80 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">A. Client Services</span>
+                  <span className="text-[10px] text-slate-400 font-mono">Custom Built</span>
                 </div>
-              ))}
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Tailored web development, custom software, business automation, and conversational AI chatbots designed around specific business needs.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800/80 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">B. Software Products</span>
+                  <span className="text-[10px] text-slate-400 font-mono">In-House</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Specialized software products like Sajinova Lab for pathology laboratories, solving industry problems with offline resilience and local data security.
+                </p>
+              </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>Clear communication, tested working software, and direct support on every project.</span>
+            <div className="pt-2 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span>Direct communication and ongoing practical support.</span>
             </div>
           </div>
         </div>

@@ -24,6 +24,7 @@ import {
 import { api, authStorage } from '../services/api';
 import { AdminStats, InquiryStatus, ProjectInquiry } from '../types';
 import { siteConfig } from '../config/siteConfig';
+import { SEO } from '../components/SEO';
 
 interface AdminPageProps {
   onBackToHome: () => void;
@@ -220,6 +221,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToHome }) => {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-[#0B0F17] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <SEO
+          title="Administrator Portal | Sajid Innovations"
+          description="Private administrative portal for Sajid Innovations."
+          canonicalUrl="https://www.sajidinnovations.in/admin"
+          noindex={true}
+        />
         <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
           <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mx-auto mb-4">
             <Lock className="w-6 h-6" />
@@ -267,9 +274,6 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToHome }) => {
                   placeholder="Enter administrator password"
                   className="w-full px-3.5 py-2.5 text-sm bg-slate-900 border border-slate-800 rounded-lg text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 />
-                <p className="text-[11px] text-slate-500 mt-1 font-mono">
-                  Default demo password: <span className="text-slate-300">sajidtech2026!</span>
-                </p>
               </div>
 
               <button
@@ -293,7 +297,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToHome }) => {
                 onClick={onBackToHome}
                 className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
               >
-                ← Return to Public Portfolio
+                ← Return to Website
               </button>
             </div>
           </div>
@@ -305,15 +309,21 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToHome }) => {
   // --- DASHBOARD VIEW ---
   return (
     <div className="min-h-screen bg-[#0B0F17] text-slate-200">
+      <SEO
+        title="Admin Dashboard | Sajid Innovations"
+        description="Private administrative management dashboard for Sajid Innovations."
+        canonicalUrl="https://www.sajidinnovations.in/admin"
+        noindex={true}
+      />
       {/* Top Admin Bar */}
       <header className="bg-[#111827] border-b border-slate-800 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               onClick={onBackToHome}
-              className="text-xs text-slate-400 hover:text-white transition-colors"
+              className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
             >
-              ← Public Site
+              ← Return to Website
             </button>
             <span className="text-slate-600">/</span>
             <div className="flex items-center gap-2">

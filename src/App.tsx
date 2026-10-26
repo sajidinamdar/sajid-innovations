@@ -1,78 +1,82 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { ScrollToTop } from './components/ScrollToTop';
 import { Navbar } from './components/Navbar';
-import { Hero } from './sections/Hero';
-import { About } from './sections/About';
-import { Services } from './sections/Services';
-import { Projects } from './sections/Projects';
-import { HowItWorks } from './sections/HowItWorks';
-import { Trust } from './sections/Trust';
-import { FAQ } from './sections/FAQ';
-import { Contact } from './sections/Contact';
 import { Footer } from './components/Footer';
 import { FloatingContactWidget } from './components/FloatingContactWidget';
 import { IdeaSubmissionModal } from './components/IdeaSubmissionModal';
 import { PrivacyModal } from './components/PrivacyModal';
+
+// Pages
+import { HomePage } from './pages/HomePage';
+import { ServicesPage } from './pages/ServicesPage';
+import { ProductsPage } from './pages/ProductsPage';
+import { SajinovaLabPage } from './pages/SajinovaLabPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { EnquiryPage } from './pages/EnquiryPage';
 import { AdminPage } from './pages/AdminPage';
 
-export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'admin'>('home');
+function AppLayout() {
   const [isIdeaModalOpen, setIsIdeaModalOpen] = useState(false);
   const [preselectedService, setPreselectedService] = useState<string | undefined>(undefined);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Sync with window.location.hash for direct /admin routing
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
+  // Handle #admin legacy hash navigation cleanly by redirecting to /admin
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === '#admin') {
-        setCurrentView('admin');
-      } else {
-        setCurrentView('home');
-      }
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+    if (window.location.hash === '#admin') {
+      window.location.hash = '';
+      navigate('/admin');
+    }
+  }, [navigate]);
 
   const handleOpenIdeaModal = (serviceTitle?: string) => {
     setPreselectedService(serviceTitle);
     setIsIdeaModalOpen(true);
   };
 
-  const handleNavigateToAdmin = () => {
-    window.location.hash = '#admin';
-    setCurrentView('admin');
-  };
-
-  const handleBackToHome = () => {
-    window.location.hash = '';
-    setCurrentView('home');
-  };
-
-  if (currentView === 'admin') {
-    return <AdminPage onBackToHome={handleBackToHome} />;
+  if (isAdminRoute) {
+    return (
+      <Routes>
+        <Route path="/admin" element={<AdminPage onBackToHome={() => navigate('/')} />} />
+        <Route path="*" element={<Navigate to="/admin" replace />} />
+      </Routes>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0F17] text-[#F9FAFB] flex flex-col font-sans overflow-x-hidden w-full">
-      {/* 3-Zone Fixed Navbar */}
+    <div className="min-h-screen bg-[#0B0F17] text-[#F9FAFB] flex flex-col font-sans overflow-x-hidden w-full selection:bg-cyan-500/30 selection:text-white">
+      {/* Fixed Navigation Bar */}
       <Navbar onOpenIdeaModal={() => handleOpenIdeaModal()} />
 
-      {/* Main Public Content */}
+      {/* Public Routed Content */}
       <main className="flex-grow">
-        <Hero onOpenIdeaModal={() => handleOpenIdeaModal()} />
-        <About />
-        <Services onSelectService={(title) => handleOpenIdeaModal(title)} />
-        <Projects />
-        <HowItWorks onOpenIdeaModal={() => handleOpenIdeaModal()} />
-        <Trust />
-        <FAQ />
-        <Contact onOpenIdeaModal={() => handleOpenIdeaModal()} />
+        <Routes>
+          <Route path="/" element={<HomePage onOpenIdeaModal={handleOpenIdeaModal} />} />
+          <Route path="/services" element={<ServicesPage onOpenIdeaModal={handleOpenIdeaModal} />} />
+          <Route path="/products" element={<ProductsPage onOpenIdeaModal={handleOpenIdeaModal} />} />
+          <Route
+            path="/sajinova-lab"
+            element={
+              <SajinovaLabPage
+                onOpenDemoRequest={() => handleOpenIdeaModal('Sajinova Lab Demo')}
+              />
+            }
+          />
+          <Route path="/about" element={<AboutPage onOpenIdeaModal={handleOpenIdeaModal} />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/enquire/:category" element={<EnquiryPage />} />
+          <Route path="/enquire" element={<Navigate to="/enquire/general" replace />} />
+          <Route path="/admin" element={<AdminPage onBackToHome={() => navigate('/')} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
-      {/* Accessible Floating Contact Widget */}
+      {/* Floating Contact Widget */}
       <FloatingContactWidget onOpenIdeaModal={() => handleOpenIdeaModal()} />
 
       {/* Interactive Modals */}
@@ -87,11 +91,20 @@ export default function App() {
         onClose={() => setIsPrivacyModalOpen(false)}
       />
 
-      {/* Footer */}
+      {/* Global Footer */}
       <Footer
         onOpenPrivacyModal={() => setIsPrivacyModalOpen(true)}
-        onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToAdmin={() => navigate('/admin')}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <AppLayout />
+    </BrowserRouter>
   );
 }

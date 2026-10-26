@@ -1,14 +1,44 @@
 import type { Plugin, ViteDevServer } from 'vite';
 import type { IncomingMessage, ServerResponse } from 'http';
-import { InquiryStore } from './storage.ts';
 import { siteConfig } from '../config/siteConfig.ts';
 import { sendInquiryEmails } from './emailService.ts';
+import {
+  verifyAdminCredentials,
+  createSessionToken,
+  verifySessionToken,
+  revokeSessionToken,
+  extractBearerToken
+} from './auth.ts';
+import {
+  persistInquiry,
+  fetchInquiries,
+  fetchInquiryById,
+  updateInquiryDetails,
+  removeInquiry,
+  fetchAdminStatistics
+} from './db.ts';
+import { ProjectInquiry } from '../types/index.ts';
 
-const ADMIN_TOKEN = 'adm_sajidtech_session_token_98472';
-const VALID_CREDENTIALS = [
-  { username: 'admin', password: 'sajidtech2026!' },
-  { username: 'sajid', password: 'sajidtech2026!' }
-];
+// In-memory IP rate limiter for brute-force prevention
+interface RateLimitRecord {
+  count: number;
+  resetAt: number;
+}
+const rateLimits = new Map<string, RateLimitRecord>();
+
+function checkRateLimit(key: string, maxLimit: number, windowMs: number): boolean {
+  const now = Date.now();
+  const record = rateLimits.get(key);
+  if (!record || now > record.resetAt) {
+    rateLimits.set(key, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+  if (record.count >= maxLimit) {
+    return false;
+  }
+  record.count++;
+  return true;
+}
 
 // Helper to parse JSON body from incoming Node request
 function parseBody(req: IncomingMessage): Promise<any> {
@@ -41,15 +71,13 @@ function sendJson(res: ServerResponse, statusCode: number, data: any) {
   res.end(JSON.stringify(data));
 }
 
-// Check admin bearer token
-function isAuthorized(req: IncomingMessage): boolean {
-  const authHeader = req.headers['authorization'];
-  if (!authHeader) return false;
-  const parts = authHeader.split(' ');
-  if (parts.length === 2 && parts[0] === 'Bearer' && parts[1] === ADMIN_TOKEN) {
-    return true;
-  }
-  return false;
+// Check admin session using the shared auth module
+async function getAuthorizedSession(req: IncomingMessage): Promise<{ username: string } | null> {
+  const token = extractBearerToken(req.headers['authorization']);
+  if (!token) return null;
+  const result = await verifySessionToken(token);
+  if (!result.valid || !result.username) return null;
+  return { username: result.username };
 }
 
 export function apiPlugin(): Plugin {
@@ -65,7 +93,6 @@ export function apiPlugin(): Plugin {
           return next();
         }
 
-        const store = InquiryStore.getInstance();
         const urlObj = new URL(url, 'http://localhost:3000');
         const pathname = urlObj.pathname;
 
@@ -88,11 +115,17 @@ export function apiPlugin(): Plugin {
 
           // --- PUBLIC: SUBMIT IDEA INQUIRY ---
           if (pathname === '/api/ideas' && method === 'POST') {
+            const clientIp = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || 'local';
+            if (!checkRateLimit(`enquiry_${clientIp}`, 20, 15 * 60 * 1000)) {
+              return sendJson(res, 429, {
+                error: 'Too many submissions from this connection. Please wait a few minutes before submitting another enquiry.'
+              });
+            }
+
             const body = await parseBody(req);
 
             // 1. Anti-spam honeypot detection
             if (body.honeypot && String(body.honeypot).trim() !== '') {
-              // Pretend success to mislead spambots
               return sendJson(res, 201, {
                 success: true,
                 ref_id: 'SI-2026-BOTREJECT',
@@ -134,8 +167,19 @@ export function apiPlugin(): Plugin {
               });
             }
 
-            // 3. Persist inquiry
-            const newInquiry = store.create({
+            // 3. Generate reference ID and record structure
+            const year = new Date().getFullYear();
+            const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+              code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            const ref_id = `SI-${year}-${code}`;
+            const nowIso = new Date().toISOString();
+
+            const newInquiry: ProjectInquiry = {
+              id: `inq-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+              ref_id,
               name: body.name.trim(),
               email: body.email.trim().toLowerCase(),
               phone: body.phone ? body.phone.trim() : undefined,
@@ -151,12 +195,18 @@ export function apiPlugin(): Plugin {
               timeline: body.timeline || 'Flexible',
               preferred_contact: body.preferred_contact || 'email',
               additional_details: body.additional_details ? body.additional_details.trim() : undefined,
-              consent: Boolean(body.consent)
-            });
+              consent: Boolean(body.consent),
+              status: 'new',
+              created_at: nowIso,
+              updated_at: nowIso
+            };
 
-            // 4. Send instant email notification to Sajid and confirmation to client
-            sendInquiryEmails(newInquiry).catch(err => {
-              console.error('[API Server] Email notification error:', err);
+            // 4. Persist in database
+            await persistInquiry(newInquiry);
+
+            // 5. Send instant email notification to owner and confirmation to customer
+            await sendInquiryEmails(newInquiry).catch(err => {
+              console.error('[API Server] Email notification warning:', err?.message || err);
             });
 
             return sendJson(res, 201, {
@@ -168,22 +218,31 @@ export function apiPlugin(): Plugin {
 
           // --- AUTH: LOGIN ---
           if (pathname === '/api/auth/login' && method === 'POST') {
-            const body = await parseBody(req);
-            const user = VALID_CREDENTIALS.find(
-              c => c.username === body.username && c.password === body.password
-            );
+            const clientIp = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || 'local';
+            if (!checkRateLimit(`login_${clientIp}`, 6, 60 * 1000)) {
+              return sendJson(res, 429, {
+                error: 'Too many login attempts. Please wait 1 minute before trying again.'
+              });
+            }
 
-            if (!user) {
+            const body = await parseBody(req);
+            const usernameInput = String(body.username || '').trim();
+            const passwordInput = String(body.password || '');
+
+            const isValid = verifyAdminCredentials(usernameInput, passwordInput);
+            if (!isValid) {
               return sendJson(res, 401, {
                 error: 'Invalid administrator credentials.'
               });
             }
 
+            const sessionToken = createSessionToken(usernameInput);
+
             return sendJson(res, 200, {
-              token: ADMIN_TOKEN,
+              token: sessionToken,
               user: {
                 id: 'usr-admin-1',
-                username: user.username,
+                username: usernameInput,
                 role: 'admin'
               }
             });
@@ -191,33 +250,39 @@ export function apiPlugin(): Plugin {
 
           // --- AUTH: ME ---
           if (pathname === '/api/auth/me' && method === 'GET') {
-            if (!isAuthorized(req)) {
-              return sendJson(res, 401, { error: 'Unauthorized.' });
+            const session = await getAuthorizedSession(req);
+            if (!session) {
+              return sendJson(res, 401, { error: 'Unauthorized or session expired.' });
             }
             return sendJson(res, 200, {
               id: 'usr-admin-1',
-              username: 'admin',
+              username: session.username,
               role: 'admin'
             });
           }
 
           // --- AUTH: LOGOUT ---
           if (pathname === '/api/auth/logout' && method === 'POST') {
+            const token = extractBearerToken(req.headers['authorization']);
+            if (token) {
+              await revokeSessionToken(token);
+            }
             return sendJson(res, 200, { success: true, message: 'Logged out successfully.' });
           }
 
           // --- ADMIN: DASHBOARD STATS ---
           if (pathname === '/api/admin/stats' && method === 'GET') {
-            if (!isAuthorized(req)) {
-              return sendJson(res, 401, { error: 'Unauthorized.' });
+            if (!(await getAuthorizedSession(req))) {
+              return sendJson(res, 401, { error: 'Unauthorized or session expired.' });
             }
-            return sendJson(res, 200, store.getStats());
+            const stats = await fetchAdminStatistics();
+            return sendJson(res, 200, stats);
           }
 
           // --- ADMIN: LIST INQUIRIES ---
           if (pathname === '/api/admin/ideas' && method === 'GET') {
-            if (!isAuthorized(req)) {
-              return sendJson(res, 401, { error: 'Unauthorized.' });
+            if (!(await getAuthorizedSession(req))) {
+              return sendJson(res, 401, { error: 'Unauthorized or session expired.' });
             }
 
             const search = urlObj.searchParams.get('search') || undefined;
@@ -226,7 +291,7 @@ export function apiPlugin(): Plugin {
             const page = parseInt(urlObj.searchParams.get('page') || '1', 10);
             const limit = parseInt(urlObj.searchParams.get('limit') || '15', 10);
 
-            const result = store.getAll({ search, status, category, page, limit });
+            const result = await fetchInquiries({ search, status, category, page, limit });
             return sendJson(res, 200, result);
           }
 
@@ -235,12 +300,12 @@ export function apiPlugin(): Plugin {
           if (singleInquiryMatch) {
             const inquiryId = singleInquiryMatch[1];
 
-            if (!isAuthorized(req)) {
-              return sendJson(res, 401, { error: 'Unauthorized.' });
+            if (!(await getAuthorizedSession(req))) {
+              return sendJson(res, 401, { error: 'Unauthorized or session expired.' });
             }
 
             if (method === 'GET') {
-              const item = store.getById(inquiryId);
+              const item = await fetchInquiryById(inquiryId);
               if (!item) {
                 return sendJson(res, 404, { error: 'Inquiry not found.' });
               }
@@ -249,7 +314,7 @@ export function apiPlugin(): Plugin {
 
             if (method === 'PATCH') {
               const body = await parseBody(req);
-              const updated = store.update(inquiryId, {
+              const updated = await updateInquiryDetails(inquiryId, {
                 status: body.status,
                 internal_notes: body.internal_notes,
                 follow_up_date: body.follow_up_date
@@ -262,7 +327,7 @@ export function apiPlugin(): Plugin {
             }
 
             if (method === 'DELETE') {
-              const deleted = store.delete(inquiryId);
+              const deleted = await removeInquiry(inquiryId);
               if (!deleted) {
                 return sendJson(res, 404, { error: 'Inquiry not found.' });
               }
@@ -273,10 +338,10 @@ export function apiPlugin(): Plugin {
           // If no route matched
           return sendJson(res, 404, { error: 'API endpoint not found.' });
         } catch (error: any) {
-          console.error('[API Server Error]', error);
+          console.error('[API Server Error]', error?.message || error);
           return sendJson(res, 500, {
             error: 'Internal server error',
-            message: error?.message || 'Something went wrong.'
+            message: 'Something went wrong processing your request.'
           });
         }
       });

@@ -70,6 +70,25 @@ export interface ProjectItem {
   githubUrl?: string;
 }
 
+export interface ProductItem {
+  id: string;
+  name: string;
+  tagline: string;
+  slug: string;
+  category: string;
+  description: string;
+  targetAudience: string;
+  keyFeatures: string[];
+  specs: {
+    platform: string;
+    offlineCapability: string;
+    database: string;
+    security: string;
+    reporting: string;
+  };
+  status: 'Available' | 'Commercial Release' | 'In Development';
+}
+
 export interface FAQItem {
   question: string;
   answer: string;

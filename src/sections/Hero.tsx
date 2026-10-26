@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowUpRight, MessageSquare, Terminal, Cpu, Database, Server, Layers } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Code, Database, Sparkles, Layers, ShieldCheck, Cpu } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 interface HeroProps {
@@ -8,144 +9,153 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenIdeaModal }) => {
   return (
-    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 md:pt-40 md:pb-28 overflow-hidden">
       {/* Background ambient lighting */}
       <div
         aria-hidden="true"
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-blue-600/10 via-indigo-600/10 to-transparent blur-3xl pointer-events-none rounded-full"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] sm:w-[900px] h-[400px] bg-gradient-to-tr from-cyan-500/10 via-blue-600/10 to-indigo-600/5 blur-3xl pointer-events-none rounded-full"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-          {/* Left Column: Core Value Proposition */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Column: Brand Eyebrow, H1, Description & CTAs */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex items-center px-3 py-1 text-xs font-semibold text-blue-400 bg-blue-950/40 border border-blue-800/40 rounded-full">
-                {siteConfig.brandPositioning}
-              </div>
-              <div className="inline-flex items-center px-3 py-1 text-xs font-medium text-slate-300 bg-slate-900 border border-slate-800 rounded-full">
-                Founder: {siteConfig.founderName}
-              </div>
+            {/* Eyebrow */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="inline-flex items-center px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase text-cyan-400 bg-cyan-950/40 border border-cyan-800/40 rounded-full shadow-sm">
+                {siteConfig.heroEyebrow}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 bg-slate-900/90 border border-slate-800 rounded-full">
+                Founder: <span className="text-white font-semibold">{siteConfig.founderName}</span>
+              </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-[1.18] sm:leading-[1.15]">
-              Have a Business Idea? <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500">
-                Let's Build It.
+            {/* Main H1 - Single primary H1 per Master Prompt */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white text-balance leading-[1.18] sm:leading-[1.12]">
+              Turning Ideas Into{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">
+                Powerful Digital Solutions.
               </span>
             </h1>
 
+            {/* Supporting Description */}
             <p className="text-base sm:text-xl font-normal text-slate-300 text-balance leading-relaxed">
               {siteConfig.heroSubtitle}
             </p>
 
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl">
-              {siteConfig.heroParagraph}
+            {/* Supporting Microcopy */}
+            <p className="text-sm sm:text-base font-medium text-cyan-300/90 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              {siteConfig.heroMicrocopy}
             </p>
 
-            {/* CTAs */}
-            <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-3.5">
-              <button
-                onClick={onOpenIdeaModal}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl sm:rounded-lg shadow-lg shadow-blue-600/25 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 min-h-[44px]"
+            {/* Primary & Secondary CTAs */}
+            <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
+              <Link
+                to="/enquire/general"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 rounded-xl sm:rounded-lg shadow-lg shadow-blue-600/25 transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 min-h-[44px]"
               >
-                <span>Discuss Your Project</span>
+                <span>Let's Build Something</span>
                 <ArrowUpRight className="w-4 h-4" />
+              </Link>
+
+              <Link
+                to="/products"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 rounded-xl sm:rounded-lg transition-all duration-150 min-h-[44px]"
+              >
+                <span>Explore What We Build</span>
+              </Link>
+
+              <button
+                type="button"
+                onClick={onOpenIdeaModal}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-medium text-slate-400 hover:text-white bg-slate-900/40 hover:bg-slate-900 border border-slate-800/80 rounded-xl sm:rounded-lg transition-all duration-150 cursor-pointer min-h-[44px]"
+              >
+                <span>Quick Inquiry Form</span>
               </button>
-
-              <a
-                href="#projects"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-xl sm:rounded-lg transition-all duration-150 min-h-[44px]"
-              >
-                <span>Explore My Projects</span>
-              </a>
-
-              <a
-                href="#contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-medium text-slate-300 hover:text-white bg-slate-900/60 hover:bg-slate-800 border border-slate-800 rounded-xl sm:rounded-lg transition-all duration-150 min-h-[44px]"
-              >
-                <span>Contact Me</span>
-              </a>
             </div>
 
-            {/* Supporting Text */}
-            <div className="pt-5 border-t border-slate-800/80 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              {siteConfig.heroSupportingText}
+            {/* Small Brand Keywords */}
+            <div className="pt-4 border-t border-slate-800/80 flex items-center gap-3 text-xs text-slate-400">
+              <span className="font-semibold text-slate-300">Core Focus:</span>
+              {siteConfig.heroKeywords.map((keyword, index) => (
+                <React.Fragment key={keyword}>
+                  <span className="hover:text-cyan-400 transition-colors">{keyword}</span>
+                  {index < siteConfig.heroKeywords.length - 1 && <span className="text-slate-600">·</span>}
+                </React.Fragment>
+              ))}
             </div>
           </div>
 
-          {/* Right Column: Clear Solution Architecture Graphic */}
+          {/* Right Column: Visual Architecture - Ideas becoming digital solutions */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#0F172A] border border-slate-800 p-4 sm:p-6 shadow-2xl">
+            <div className="relative rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#0B0F17] border border-slate-800/90 p-5 sm:p-6 shadow-2xl">
+              {/* Header */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-800 text-xs text-slate-400">
-                <span className="font-semibold text-slate-200">How Your Application Works</span>
-                <span className="text-slate-400">Complete System</span>
+                <span className="font-semibold text-slate-200 flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+                  Sajid Innovations Architecture
+                </span>
+                <span className="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-cyan-300 font-mono">
+                  Real Systems
+                </span>
               </div>
 
-              {/* Architecture nodes diagram */}
-              <div className="py-5 sm:py-6 space-y-3.5 sm:space-y-4">
-                {/* Node 1: What users see */}
-                <div className="p-3 sm:p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-4 hover:border-blue-500/40 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-blue-950 border border-blue-800/60 flex items-center justify-center text-blue-400 shrink-0">
-                      <Layers className="w-4 h-4" />
+              {/* Connected Visual Cards */}
+              <div className="py-4 space-y-3.5">
+                {/* Branch A: Client Services */}
+                <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-cyan-500/40 transition-colors">
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800/60 flex items-center justify-center text-cyan-400 shrink-0">
+                        <Code className="w-4 h-4" />
+                      </div>
+                      <div className="text-sm font-semibold text-white">Client Digital Solutions</div>
                     </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">What Your Customers See</div>
-                      <div className="text-xs text-slate-400">Clean web & mobile screens · Fast, simple & easy to use</div>
-                    </div>
+                    <span className="text-[10px] uppercase font-semibold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/40">
+                      Direction A
+                    </span>
                   </div>
-                  <span className="text-[11px] font-medium text-blue-400/90 self-end sm:self-auto shrink-0">Web & Phone</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Custom web applications, business software, AI chatbots, and workflow automation tailored to client requirements.
+                  </p>
                 </div>
 
-                {/* Connection line */}
-                <div className="flex justify-center">
-                  <div className="w-0.5 h-3.5 sm:h-4 bg-slate-800" />
+                {/* Connecting Node */}
+                <div className="flex items-center justify-center gap-2 text-xs text-slate-500 font-mono">
+                  <span className="h-px w-10 bg-slate-800" />
+                  <span className="text-cyan-400 text-[11px]">Integrated Under One Brand</span>
+                  <span className="h-px w-10 bg-slate-800" />
                 </div>
 
-                {/* Node 2: Behind the scenes engine */}
-                <div className="p-3 sm:p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-4 hover:border-indigo-500/40 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-950 border border-indigo-800/60 flex items-center justify-center text-indigo-400 shrink-0">
-                      <Server className="w-4 h-4" />
+                {/* Branch B: Software Products */}
+                <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-blue-500/40 transition-colors">
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-blue-950 border border-blue-800/60 flex items-center justify-center text-blue-400 shrink-0">
+                        <Database className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-white">Our Software Products</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Behind-the-Scenes Business Engine</div>
-                      <div className="text-xs text-slate-400">User accounts · Automated notifications · Fast processing</div>
-                    </div>
+                    <span className="text-[10px] uppercase font-semibold text-blue-400 bg-blue-950/60 px-2 py-0.5 rounded border border-blue-800/40">
+                      Direction B
+                    </span>
                   </div>
-                  <span className="text-[11px] font-medium text-indigo-400/90 self-end sm:self-auto shrink-0">Core Engine</span>
-                </div>
-
-                {/* Connection line */}
-                <div className="flex justify-center">
-                  <div className="w-0.5 h-3.5 sm:h-4 bg-slate-800" />
-                </div>
-
-                {/* Node 3: AI & Data Vault */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-purple-500/40 transition-colors">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Cpu className="w-4 h-4 text-purple-400" />
-                      <span className="text-xs font-semibold text-white">Smart AI Assistant</span>
-                    </div>
-                    <p className="text-[11px] text-slate-400">Answers questions from your PDFs & chats 24/7</p>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-emerald-500/40 transition-colors">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Database className="w-4 h-4 text-emerald-400" />
-                      <span className="text-xs font-semibold text-white">Secure Data Vault</span>
-                    </div>
-                    <p className="text-[11px] text-slate-400">Customer records kept safe, backed up & private</p>
-                  </div>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Sajinova Lab — laboratory management software with offline-first SQLite, clinical test catalogs, dynamic PDF reports & WhatsApp sharing.
+                  </p>
                 </div>
               </div>
 
-              {/* Status footer inside schematic */}
-              <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500">
-                <span>Direct collaboration with the engineer</span>
-                <span className="text-slate-300 font-medium">Status: Ready to build</span>
+              {/* Bottom Assurance Note */}
+              <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                <span className="flex items-center gap-1.5 text-slate-300">
+                  <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+                  Practical · Reliable · Tested
+                </span>
+                <span className="text-slate-500">Ahilyanagar, Maharashtra, India</span>
               </div>
             </div>
           </div>
